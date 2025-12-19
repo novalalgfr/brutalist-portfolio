@@ -76,7 +76,7 @@ export default function HomeProjects() {
 			ref={container}
 			className="relative py-20 bg-neo-bg border-t-4 border-neo-black"
 		>
-			<div className="container px-4 md:px-10 mb-10 flex items-end justify-between">
+			<div className="w-full px-4 md:px-10 mb-10 flex items-end justify-between">
 				<h2 className="text-4xl md:text-6xl font-black italic tracking-tighter">
 					SELECTED <br /> WORKS
 				</h2>

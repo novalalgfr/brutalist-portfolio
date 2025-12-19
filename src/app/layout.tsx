@@ -12,7 +12,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-	title: 'My Brutalist Archive',
+	title: 'Nayy Portfolio',
 	description: 'Portfolio & Experiments'
 };
 
