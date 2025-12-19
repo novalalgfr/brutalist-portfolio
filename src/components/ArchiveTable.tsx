@@ -1,12 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unused-expressions */
-/* eslint-disable react/jsx-no-comment-textnodes */
 'use client';
 
 import { useRef, useState, useEffect } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 
-// --- DATA & INTERFACE ---
 interface Project {
 	year: string;
 	title: string;
@@ -16,6 +13,7 @@ interface Project {
 	status: string;
 	desc: string;
 }
+
 const allProjects: Project[] = [
 	{
 		year: '2025',
@@ -93,23 +91,30 @@ const allProjects: Project[] = [
 
 const categories = ['ALL', 'WEBSITE', 'WEB APP', 'SOFTWARE', 'ML / AI'];
 
-// --- MODAL COMPONENT (Sama seperti sebelumnya) ---
-function ProjectModal({ project, onClose }: { project: Project; onClose: () => void }) {
+interface ProjectModalProps {
+	project: Project;
+	onClose: () => void;
+}
+
+function ProjectModal({ project, onClose }: ProjectModalProps) {
 	const modalRef = useRef(null);
 	const contentRef = useRef(null);
+
 	useGSAP(
 		() => {
 			const tl = gsap.timeline();
-			tl.fromTo(modalRef.current, { opacity: 0 }, { opacity: 1, duration: 0.3 });
-			tl.fromTo(contentRef.current, { y: '100%' }, { y: '0%', duration: 0.6, ease: 'power4.inOut' });
+			tl.fromTo(modalRef.current, { opacity: 0 }, { opacity: 1, duration: 0.2 });
+			tl.fromTo(contentRef.current, { y: '100%' }, { y: '0%', duration: 0.5, ease: 'power4.inOut' });
 		},
 		{ scope: modalRef }
 	);
+
 	const handleClose = () => {
 		const tl = gsap.timeline({ onComplete: onClose });
-		tl.to(contentRef.current, { y: '100%', duration: 0.5, ease: 'power4.in' });
-		tl.to(modalRef.current, { opacity: 0, duration: 0.3 }, '-=0.2');
+		tl.to(contentRef.current, { y: '100%', duration: 0.4, ease: 'power4.in' });
+		tl.to(modalRef.current, { opacity: 0, duration: 0.2 }, '-=0.2');
 	};
+
 	return (
 		<div
 			ref={modalRef}
@@ -117,7 +122,7 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
 		>
 			<div
 				onClick={handleClose}
-				className="absolute inset-0 bg-neo-black/80 backdrop-blur-sm cursor-pointer"
+				className="absolute inset-0 bg-neo-black/95 cursor-pointer"
 			/>
 			<div
 				ref={contentRef}
@@ -134,43 +139,54 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
 						CLOSE [X]
 					</button>
 				</div>
-				<div className="flex-1 overflow-y-auto p-0 md:flex md:flex-row">
-					<div className="w-full md:w-3/4 bg-gray-200 min-h-[1000px] border-b-4 md:border-b-0 md:border-r-4 border-neo-black relative flex flex-col">
+
+				<div className="flex-1 flex flex-col md:flex-row min-h-0 overflow-hidden">
+					<div className="w-full md:w-3/4 bg-gray-200 h-full overflow-y-auto border-b-4 md:border-b-0 md:border-r-4 border-neo-black relative flex flex-col">
 						<div
-							className="h-[400px] w-full flex items-center justify-center text-neo-black font-black text-4xl p-10 text-center"
+							className="h-[400px] w-full flex items-center justify-center text-neo-black font-black text-4xl p-10 text-center shrink-0"
 							style={{ backgroundColor: project.color }}
 						>
 							HERO IMAGE <br /> {project.title}
 						</div>
-						<div className="flex-1 bg-white p-10 space-y-10">
+						<div className="flex-1 bg-white p-10 space-y-10 min-h-[1000px]">
 							<div className="h-64 bg-gray-100 border-2 border-dashed border-gray-300 flex items-center justify-center text-gray-400">
-								Content Section 1
+								Section 1: UI Components
+							</div>
+							<div className="h-64 bg-gray-100 border-2 border-dashed border-gray-300 flex items-center justify-center text-gray-400">
+								Section 2: Mobile View
+							</div>
+							<div className="h-64 bg-gray-100 border-2 border-dashed border-gray-300 flex items-center justify-center text-gray-400">
+								Section 3: Feature Breakdown
 							</div>
 						</div>
 					</div>
-					<div className="w-full md:w-1/4 p-6 md:p-8 bg-neo-white space-y-8">
-						<div>
-							<h3 className="font-bold text-sm text-gray-500 mb-1">TYPE</h3>
-							<p className="font-black text-xl uppercase">{project.category}</p>
-						</div>
-						<div>
-							<h3 className="font-bold text-sm text-gray-500 mb-1">STACK</h3>
-							<div className="flex flex-wrap gap-2">
-								{project.stack.split(', ').map((t) => (
-									<span
-										key={t}
-										className="px-2 py-1 border border-neo-black bg-neo-lime text-xs font-bold"
-									>
-										{t}
-									</span>
-								))}
+
+					<div className="w-full md:w-1/4 h-full bg-neo-white overflow-y-auto flex flex-col">
+						<div className="p-6 md:p-8 space-y-8">
+							<div>
+								<h3 className="font-bold text-sm text-gray-500 mb-1">TYPE</h3>
+								<p className="font-black text-xl uppercase">{project.category}</p>
+							</div>
+							<div>
+								<h3 className="font-bold text-sm text-gray-500 mb-1">STACK</h3>
+								<div className="flex flex-wrap gap-2">
+									{project.stack.split(', ').map((t) => (
+										<span
+											key={t}
+											className="px-2 py-1 border border-neo-black bg-neo-lime text-xs font-bold"
+										>
+											{t}
+										</span>
+									))}
+								</div>
+							</div>
+							<div>
+								<h3 className="font-bold text-sm text-gray-500 mb-1">DESC</h3>
+								<p className="text-sm opacity-80 font-medium">{project.desc}</p>
 							</div>
 						</div>
-						<div>
-							<h3 className="font-bold text-sm text-gray-500 mb-1">DESC</h3>
-							<p className="text-sm opacity-80 font-medium">{project.desc}</p>
-						</div>
-						<div className="pt-8 border-t-2 border-neo-black">
+
+						<div className="mt-auto p-6 md:p-8 pt-4 border-t-2 border-neo-black bg-neo-white sticky bottom-0">
 							<button className="w-full py-4 bg-neo-black text-neo-white font-bold hover:bg-neo-lime hover:text-neo-black transition-colors shadow-neo hover:shadow-none hover:translate-x-1 hover:translate-y-1">
 								VISIT SITE ↗
 							</button>
@@ -182,23 +198,41 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
 	);
 }
 
-// --- ROW COMPONENT (Marquee) ---
-const ProjectRow = ({ project, index, onClick, setHoveredColor, previewRef }: any) => {
+interface ProjectRowProps {
+	project: Project;
+	index: number;
+	onClick: () => void;
+	setHoveredColor: (color: string | null) => void;
+	previewRef: React.RefObject<HTMLDivElement | null>;
+}
+
+const ProjectRow = ({ project, index, onClick, setHoveredColor, previewRef }: ProjectRowProps) => {
 	const rowRef = useRef(null);
-	const marqueeRef = useRef(null);
+	const marqueeRef = useRef<HTMLDivElement>(null);
 	const [isHovered, setIsHovered] = useState(false);
 
 	useGSAP(
 		() => {
 			if (!marqueeRef.current) return;
+
+			const width = marqueeRef.current.offsetWidth;
+			const pixelsPerSecond = 100;
+			const duration = width / 2 / pixelsPerSecond;
+
 			const tl = gsap.to(marqueeRef.current, {
 				xPercent: -50,
 				repeat: -1,
-				duration: 5,
+				duration: duration,
 				ease: 'linear',
 				paused: true
 			});
-			isHovered ? tl.play() : (tl.pause(), gsap.to(marqueeRef.current, { xPercent: 0, duration: 0.5 }));
+
+			if (isHovered) {
+				tl.play();
+			} else {
+				tl.pause();
+				gsap.to(marqueeRef.current, { xPercent: 0, duration: 0.5 });
+			}
 		},
 		{ scope: rowRef, dependencies: [isHovered] }
 	);
@@ -220,30 +254,33 @@ const ProjectRow = ({ project, index, onClick, setHoveredColor, previewRef }: an
 			className="group relative w-full border-b-4 border-neo-black bg-neo-white hover:bg-neo-black hover:text-neo-lime transition-colors duration-300 cursor-pointer overflow-hidden h-24 md:h-32 flex items-center px-4 md:px-8"
 		>
 			<div
-				className={`flex w-full items-center justify-between transition-opacity duration-300 ${
+				className={`flex w-full items-center justify-between pr-12 md:pr-16 transition-opacity duration-300 ${
 					isHovered ? 'opacity-0' : 'opacity-100'
 				}`}
 			>
-				<div className="flex items-center gap-6 md:gap-10">
-					<span className="font-mono text-xl opacity-50">{(index + 1).toString().padStart(2, '0')}</span>
+				<div className="flex items-center gap-6 md:gap-10 overflow-hidden">
+					<span className="font-mono text-xl opacity-50 flex-shrink-0">
+						{(index + 1).toString().padStart(2, '0')}
+					</span>
 					<h3 className="text-2xl md:text-4xl font-black uppercase tracking-tighter truncate">
 						{project.title}
 					</h3>
 				</div>
-				<div className="hidden md:flex items-center gap-10">
+				<div className="hidden md:flex items-center gap-10 flex-shrink-0">
 					<span className="font-mono text-sm border-2 border-neo-black px-2 py-1">{project.category}</span>
 				</div>
 			</div>
+
 			<div
 				className={`absolute inset-0 flex items-center overflow-hidden pointer-events-none opacity-0 ${
 					isHovered ? 'opacity-100' : ''
-				}`}
+				} z-10`}
 			>
 				<div
 					ref={marqueeRef}
 					className="flex whitespace-nowrap"
 				>
-					{[...Array(6)].map((_, i) => (
+					{[...Array(10)].map((_, i) => (
 						<span
 							key={i}
 							className="text-4xl md:text-6xl font-black uppercase tracking-tighter px-4 italic text-neo-lime"
@@ -253,9 +290,10 @@ const ProjectRow = ({ project, index, onClick, setHoveredColor, previewRef }: an
 					))}
 				</div>
 			</div>
+
 			<div
-				className={`absolute right-4 md:right-8 transition-transform duration-300 ${
-					isHovered ? '-rotate-45 scale-125 text-neo-lime' : ''
+				className={`absolute right-4 md:right-8 z-20 transition-transform duration-300 ${
+					isHovered ? 'hidden' : 'text-neo-black'
 				}`}
 			>
 				↗
@@ -264,7 +302,6 @@ const ProjectRow = ({ project, index, onClick, setHoveredColor, previewRef }: an
 	);
 };
 
-// --- MAIN COMPONENT ---
 export default function ArchiveTable() {
 	const container = useRef(null);
 	const previewRef = useRef<HTMLDivElement>(null);
@@ -281,7 +318,6 @@ export default function ArchiveTable() {
 		{ scope: container }
 	);
 
-	// Floating Preview
 	useEffect(() => {
 		const movePreview = (e: MouseEvent) => {
 			if (!previewRef.current || selectedProject) return;
@@ -301,22 +337,21 @@ export default function ArchiveTable() {
 				ref={container}
 				className="w-full"
 			>
-				{/* --- NEW TAB FILTER DESIGN (SEGMENTED BAR) --- */}
 				<div className="flex justify-start mb-8 overflow-x-auto pb-2 md:pb-0">
 					<div className="inline-flex border-4 border-neo-black bg-neo-white shadow-neo">
-						{categories.map((cat) => (
+						{categories.map((cat, i) => (
 							<button
 								key={cat}
 								onClick={() => setFilter(cat)}
 								className={`
-                            px-6 py-3 font-bold font-mono text-sm uppercase transition-all whitespace-nowrap
-                            border-r-4 border-neo-black last:border-r-0
-                            ${
-								filter === cat
-									? 'bg-neo-black text-neo-lime'
-									: 'bg-neo-white text-neo-black hover:bg-neo-lime'
-							}
-                        `}
+                                    px-6 py-3 font-bold font-mono text-sm uppercase transition-all whitespace-nowrap
+                                    border-r-4 border-neo-black last:border-r-0
+                                    ${
+										filter === cat
+											? 'bg-neo-black text-neo-lime'
+											: 'bg-neo-white text-neo-black hover:bg-neo-lime'
+									}
+                                `}
 							>
 								{cat}
 							</button>
@@ -324,7 +359,6 @@ export default function ArchiveTable() {
 					</div>
 				</div>
 
-				{/* LIST CONTAINER */}
 				<div className="border-t-4 border-neo-black">
 					{filteredProjects.map((project, i) => (
 						<ProjectRow
@@ -338,11 +372,6 @@ export default function ArchiveTable() {
 					))}
 				</div>
 
-				{filteredProjects.length === 0 && (
-					<div className="py-20 text-center font-mono opacity-50 border-b-4 border-neo-black">// NO DATA</div>
-				)}
-
-				{/* FLOATING PREVIEW IMAGE */}
 				{!selectedProject && (
 					<div
 						ref={previewRef}
