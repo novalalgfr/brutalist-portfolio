@@ -1,65 +1,118 @@
-import Image from "next/image";
+'use client';
+
+import { useRef } from 'react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import Marquee from '@/components/Marquee';
+import HomeProjects from '@/components/HomeProject';
+import TheProcess from '@/components/TheProcess';
+import TechArsenal from '@/components/TechArsenal';
+import WhatIDo from '@/components/WhatIDo';
 
 export default function Home() {
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+	const container = useRef(null);
+
+	useGSAP(
+		() => {
+			const tl = gsap.timeline({ delay: 0.5 });
+
+			tl.from('.bg-grid', { opacity: 0, duration: 1 });
+
+			tl.from(
+				'.hero-text',
+				{
+					y: 100,
+					opacity: 0,
+					rotate: 5,
+					stagger: 0.1,
+					duration: 1,
+					ease: 'power4.out',
+					clearProps: 'all'
+				},
+				'-=0.5'
+			);
+
+			tl.from(
+				'.hero-marquee',
+				{
+					scaleX: 0,
+					opacity: 0,
+					duration: 0.8,
+					ease: 'power2.inOut'
+				},
+				'-=0.8'
+			);
+
+			tl.from(
+				'.hero-desc',
+				{
+					y: 20,
+					opacity: 0,
+					duration: 0.8,
+					stagger: 0.1,
+					clearProps: 'all'
+				},
+				'-=0.5'
+			);
+		},
+		{ scope: container }
+	);
+
+	return (
+		<main
+			ref={container}
+			className="min-h-screen bg-neo-bg overflow-x-hidden"
+		>
+			<section className="relative min-h-[calc(100vh-80px)] flex flex-col justify-center pb-10">
+				<div className="bg-grid absolute inset-0 bg-grid-pattern z-0 pointer-events-none" />
+
+				<div className="container relative z-10 px-4 md:px-10 flex flex-col items-start justify-center h-full pt-20">
+					<p className="hero-desc font-mono text-sm md:text-base mb-4 border-l-2 border-neo-black pl-4">
+						EST. 2025 — JAKARTA, ID
+					</p>
+
+					<div className="leading-[0.85]">
+						<h1 className="hero-text text-[15vw] md:text-[11vw] font-black tracking-tighter cursor-default select-none relative group">
+							<span className="text-neo-black transition-opacity duration-300 group-hover:opacity-0">
+								FRONTEND
+							</span>
+							<span className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 [-webkit-text-stroke:2px_#121212] [-webkit-text-fill-color:transparent]">
+								FRONTEND
+							</span>
+						</h1>
+
+						<div className="flex items-center gap-4 md:gap-10">
+							<div className="hero-text w-12 h-12 md:w-24 md:h-24 bg-neo-black rounded-full animate-pulse" />
+							<h1 className="hero-text text-[15vw] md:text-[11vw] font-black tracking-tighter text-neo-black hover:text-neo-lime transition-colors duration-300 cursor-default select-none">
+								ENGINEER
+							</h1>
+						</div>
+					</div>
+
+					<div className="hero-desc mt-8 max-w-xl">
+						<p className="text-xl md:text-2xl font-medium leading-relaxed bg-neo-white border-2 border-neo-black p-4 shadow-neo">
+							Building digital experiences with <span className="bg-neo-lime px-1">boldness</span> and
+							precision. Turning complex problems into raw, functional art.
+						</p>
+					</div>
+
+					<button className="hero-desc mt-8 px-8 py-4 bg-neo-black text-neo-white font-bold text-xl border-2 border-transparent hover:bg-neo-lime hover:text-neo-black hover:border-neo-black hover:shadow-neo transition-all duration-200">
+						EXPLORE ARCHIVE ↓
+					</button>
+				</div>
+			</section>
+
+			<WhatIDo />
+
+			<div className="hero-marquee relative z-20 w-full rotate-[-1deg] scale-105 border-y-4 border-neo-black my-10 bg-neo-lime">
+				<Marquee text="OPEN FOR COLLABORATION — FULL STACK CAPABLE — GSAP ENTHUSIAST" />
+			</div>
+
+			<HomeProjects />
+
+			<TheProcess />
+
+			<TechArsenal />
+		</main>
+	);
 }
