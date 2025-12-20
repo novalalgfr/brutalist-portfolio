@@ -21,7 +21,7 @@ export default function Marquee({ text, direction = 'left', className = '' }: Ma
 			gsap.to(textRef.current, {
 				xPercent: movePercent,
 				repeat: -1,
-				duration: 10,
+				duration: 40,
 				ease: 'linear'
 			});
 		}, container);
