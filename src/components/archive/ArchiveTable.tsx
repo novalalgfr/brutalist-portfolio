@@ -313,58 +313,38 @@ export default function ArchiveTable() {
 
 	useGSAP(
 		() => {
-			const tl = gsap.timeline({ delay: 1.2 });
+			gsap.set('.filter-container', { opacity: 0 });
+			gsap.set('.archive-row', {
+				transformPerspective: 1000,
+				rotationX: -90,
+				transformOrigin: 'top center',
+				opacity: 0,
+				y: 50
+			});
 
-			tl.fromTo(
-				'.filter-container',
-				{
-					y: -20,
-					opacity: 0
-				},
-				{
-					y: 0,
-					opacity: 1,
-					duration: 0.6,
-					ease: 'power3.out'
-				}
-			);
+			const tl = gsap.timeline({ delay: 0.2 });
 
+			tl.to('.filter-container', { opacity: 1, duration: 0.5 });
 			tl.fromTo(
 				'.filter-btn',
-				{
-					opacity: 0,
-					y: -10
-				},
-				{
-					opacity: 1,
-					y: 0,
-					duration: 0.4,
-					stagger: 0.06,
-					ease: 'back.out(1.4)'
-				},
-				'-=0.4'
+				{ scale: 0, rotation: 10 },
+				{ scale: 1, rotation: 0, stagger: 0.05, ease: 'back.out(1.7)' },
+				'<'
 			);
 
-			tl.fromTo(
+			tl.to(
 				'.archive-row',
 				{
-					x: 50,
-					opacity: 0
-				},
-				{
-					x: 0,
+					rotationX: 0,
+					y: 0,
 					opacity: 1,
-					duration: 0.4,
-					stagger: 0.05,
-					ease: 'power2.out',
+					duration: 0.8,
+					stagger: 0.08,
+					ease: 'back.out(1.2)',
 					clearProps: 'transform'
 				},
-				'-=0.2'
+				'-=0.3'
 			);
-
-			gsap.set('.archive-row', { opacity: 0, x: 50 });
-			gsap.set('.filter-btn', { opacity: 0, y: -10 });
-			gsap.set('.filter-container', { y: -20, opacity: 0 });
 		},
 		{ scope: container }
 	);
