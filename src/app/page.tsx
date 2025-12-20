@@ -87,7 +87,7 @@ export default function Home() {
 			</section>
 
 			<div
-				className="border-y-4 border-neo-black bg-neo-lime text-neo-black py-4 rotate-1 scale-105 z-10 relative transform-gpu outline outline-1 outline-transparent"
+				className="border-y-4 border-neo-black bg-neo-lime text-neo-black py-4 rotate-4 scale-105 z-10 relative transform-gpu outline outline-1 outline-transparent"
 				style={{ backfaceVisibility: 'hidden', WebkitFontSmoothing: 'antialiased' }}
 			>
 				<Marquee text="OPEN FOR WORK /// AVAILABLE FOR FREELANCE /// FRONTEND MAGIC /// BACKEND LOGIC /// " />
