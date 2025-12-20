@@ -1,6 +1,13 @@
 'use client';
 import Link from 'next/link';
 
+const socialLinks = [
+	{ name: 'GITHUB', url: 'https://github.com/novalalgfr' },
+	{ name: 'LINKEDIN', url: 'https://www.linkedin.com/in/nopall/' },
+	{ name: 'INSTAGRAM', url: 'https://www.instagram.com/novalalgfr_/' },
+	{ name: 'EMAIL', url: 'mailto:ahmad.noval2705@gmail.com' }
+];
+
 export default function Footer() {
 	return (
 		<footer className="bg-neo-black text-neo-white py-20 border-t-4 border-neo-black">
@@ -22,14 +29,16 @@ export default function Footer() {
 						hello@portfolio.com
 					</a> */}
 
-					<div className="flex gap-4 justify-end">
-						{['LINKEDIN', 'GITHUB', 'INSTAGRAM'].map((social) => (
+					<div className="flex gap-4 justify-end flex-wrap">
+						{socialLinks.map((link) => (
 							<Link
-								key={social}
-								href="#"
-								className="px-4 py-2 border-2 border-neo-white hover:bg-neo-lime hover:text-neo-black hover:border-neo-lime transition-all font-bold"
+								key={link.name}
+								href={link.url}
+								target={link.name === 'EMAIL' ? '_self' : '_blank'}
+								rel="noopener noreferrer"
+								className="px-4 py-2 border-2 border-neo-white hover:bg-neo-lime hover:text-neo-black hover:border-neo-lime transition-all font-bold text-sm md:text-base uppercase"
 							>
-								{social}
+								{link.name}
 							</Link>
 						))}
 					</div>

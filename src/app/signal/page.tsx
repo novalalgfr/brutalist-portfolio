@@ -10,7 +10,7 @@ const socialLinks = [
 	{ name: 'GITHUB', url: 'https://github.com/novalalgfr', status: 'OPEN SOURCE' },
 	{ name: 'LINKEDIN', url: 'https://www.linkedin.com/in/nopall/', status: 'PROFESSIONAL' },
 	{ name: 'INSTAGRAM', url: 'https://www.instagram.com/novalalgfr_/', status: 'PERSONAL' },
-	{ name: 'EMAIL', url: 'mailto:email@ahmad.noval2705@gmail.com', status: 'ENCRYPTED' }
+	{ name: 'EMAIL', url: 'mailto:ahmad.noval2705@gmail.com', status: 'ENCRYPTED' }
 ];
 
 export default function SignalPage() {
