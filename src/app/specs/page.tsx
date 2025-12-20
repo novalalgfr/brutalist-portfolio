@@ -88,11 +88,13 @@ export default function SpecsPage() {
 					<div className="spec-card bg-neo-black text-neo-white p-6 border-4 border-neo-black shadow-neo">
 						<h3 className="text-neo-lime font-bold font-mono mb-4 text-xl">// BIO_DATA</h3>
 						<p className="font-mono text-sm leading-relaxed opacity-80">
-							Frontend Engineer obsessed with micro-interactions. Currently operating from Jakarta.
-							Turning caffeine into clean code.
+							Frontend Dev & UI/UX Designer specializing in public sector digitization. I architect
+							intuitive government portals and education systems (SPMB) using React, Next.js, and Tailwind
+							CSS.
 							<br />
 							<br />
-							Fan of Brutalism, Anime, and Mechanical Keyboards.
+							Focused on transforming complex administrative workflows into responsive, user-centric web
+							experiences.
 						</p>
 					</div>
 				</div>
@@ -109,30 +111,18 @@ export default function SpecsPage() {
 						<div className="relative pl-8 border-l-2 border-neo-black border-dashed pb-8 last:pb-0">
 							<div className="absolute -left-[9px] top-0 w-4 h-4 bg-neo-lime border-2 border-neo-black rounded-full" />
 							<div className="flex flex-col md:flex-row md:items-baseline justify-between mb-2">
-								<h3 className="text-xl font-bold uppercase">Senior Frontend Dev</h3>
+								<h3 className="text-xl font-bold uppercase">Frontend Dev & UI/UX Designer</h3>
 								<span className="font-mono text-sm bg-neo-black text-neo-white px-2">
-									2023 — PRESENT
+									Feb 2023 — Nov 2025
 								</span>
 							</div>
-							<p className="font-bold text-gray-500 text-sm mb-2">TECH COMPANY INC.</p>
+							<p className="font-bold text-gray-500 text-sm mb-2">PT MARDAWA INTIGUNA PERSADA</p>
 							<ul className="list-disc list-inside font-mono text-sm opacity-70 space-y-1">
-								<li>Spearheaded the migration from Vue 2 to Nuxt 3.</li>
-								<li>Reduced bundle size by 40% using dynamic imports.</li>
-							</ul>
-						</div>
-
-						<div className="relative pl-8 border-l-2 border-neo-black border-dashed pb-8 last:pb-0">
-							<div className="absolute -left-[9px] top-0 w-4 h-4 bg-neo-white border-2 border-neo-black rounded-full" />
-							<div className="flex flex-col md:flex-row md:items-baseline justify-between mb-2">
-								<h3 className="text-xl font-bold uppercase">Web Developer</h3>
-								<span className="font-mono text-sm bg-gray-200 px-2 border border-neo-black">
-									2021 — 2023
-								</span>
-							</div>
-							<p className="font-bold text-gray-500 text-sm mb-2">CREATIVE AGENCY</p>
-							<ul className="list-disc list-inside font-mono text-sm opacity-70 space-y-1">
-								<li>Developed award-winning landing pages for global brands.</li>
-								<li>Implemented GSAP animations for interactive campaigns.</li>
+								<li>Designed UI/UX for various web applications.</li>
+								<li>Developed responsive frontends with optimal performance.</li>
+								<li>Collaborated with backend teams for API integration.</li>
+								<li>Built Design Systems & guidelines for product scalability.</li>
+								<li>Conducted User Research & usability testing.</li>
 							</ul>
 						</div>
 					</div>
