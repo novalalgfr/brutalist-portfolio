@@ -74,7 +74,7 @@ export default function SpecsPage() {
 
 							<div className="absolute inset-0 opacity-20 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] pointer-events-none mix-blend-multiply" />
 
-							<div className="absolute top-2 right-2 bg-neo-black text-neo-lime text-[10px] font-bold px-1 font-mono transform rotate-[-5deg]">
+							<div className="absolute top-5 right-1 bg-neo-black text-neo-lime text-[16px] font-bold px-1 font-mono transform rotate-[15deg]">
 								IDENTITY HIDDEN
 							</div>
 						</div>

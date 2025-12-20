@@ -1,22 +1,24 @@
-/* eslint-disable react/jsx-no-comment-textnodes */
 'use client';
 
-import ArchiveTable from '@/components/archive/ArchiveTable';
 import { useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import ArchiveTable from '@/components/archive/ArchiveTable';
+import TransitionGrid from '@/components/transitions/TransitionGrid';
 
 export default function ArchivePage() {
 	const container = useRef(null);
 
 	useGSAP(
 		() => {
-			const tl = gsap.timeline();
-			tl.from('.header-box', {
-				y: 50,
-				opacity: 0,
-				duration: 1,
-				stagger: 0.2,
+			gsap.set('.archive-header', { y: 50, opacity: 0 });
+
+			const tl = gsap.timeline({ delay: 0.8 });
+
+			tl.to('.archive-header', {
+				y: 0,
+				opacity: 1,
+				duration: 0.8,
 				ease: 'power3.out'
 			});
 		},
@@ -26,30 +28,53 @@ export default function ArchivePage() {
 	return (
 		<main
 			ref={container}
-			className="min-h-screen bg-neo-bg px-4 md:px-10 py-10"
+			className="min-h-screen bg-neo-bg px-4 md:px-10 py-10 relative"
 		>
-			<header className="mb-12 flex flex-col md:flex-row items-stretch gap-4">
-				<div className="header-box flex-1 bg-neo-black text-neo-white p-6 md:p-10 border-4 border-neo-black relative overflow-hidden group">
-					<div className="absolute inset-0 opacity-20 bg-[linear-gradient(rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[size:20px_20px]" />
+			<TransitionGrid />
 
-					<div className="relative z-10 flex flex-col justify-between h-full">
-						<div className="flex justify-between items-start mb-4">
-							<span className="font-mono text-xs text-neo-lime">/// PROJECT_INDEX</span>
-							<span className="font-mono text-xs opacity-50">V.2.0</span>
-						</div>
-
-						<h1 className="text-6xl md:text-8xl font-black tracking-tighter leading-none uppercase">
-							Archive.
-						</h1>
-					</div>
+			<header className="mb-12 relative overflow-hidden border-b-4 border-neo-black pb-8">
+				<div className="absolute top-0 right-0 opacity-10 pointer-events-none">
+					<svg
+						width="100"
+						height="100"
+						viewBox="0 0 100 100"
+						fill="none"
+					>
+						<path
+							d="M0 0H100V100H0V0Z"
+							stroke="black"
+							strokeWidth="2"
+						/>
+						<path
+							d="M10 10H90V90H10V10Z"
+							stroke="black"
+							strokeWidth="2"
+						/>
+					</svg>
 				</div>
 
-				<div className="header-box w-full md:w-64 bg-neo-white border-4 border-neo-black p-6 flex flex-col justify-center gap-2 shadow-neo">
-					<span className="font-mono text-xs opacity-50 uppercase">Last System Update</span>
-					<div className="text-2xl font-black bg-neo-lime inline-block px-2 self-start border-2 border-neo-black">
-						20 DEC
+				<div className="archive-header opacity-0">
+					{' '}
+					<div className="flex items-center gap-4 mb-2">
+						<span className="bg-neo-black text-neo-white border-2 border-neo-black px-3 py-1 font-bold font-mono text-xs">
+							📂 DATABASE
+						</span>
+						<span className="font-mono text-xs opacity-50">SELECTED WORKS</span>
 					</div>
-					<span className="font-mono text-sm font-bold">YEAR 2025</span>
+					<h1 className="text-6xl md:text-9xl font-black tracking-tighter leading-none text-neo-black">
+						ARCHIVE<span className="text-neo-lime text-stroke-2">.LOG</span>
+					</h1>
+					<div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mt-6 border-l-4 border-neo-black pl-4">
+						<p className="max-w-xl font-mono text-sm opacity-80">
+							A curated collection of commercial projects, case studies, and development logs. Stored for
+							long-term reference.
+						</p>
+
+						<div className="font-mono text-xs text-right opacity-60">
+							TOTAL_ENTRIES: 08 <br />
+							STATUS: PUBLIC_ACCESS
+						</div>
+					</div>
 				</div>
 			</header>
 

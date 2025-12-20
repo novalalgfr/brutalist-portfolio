@@ -188,7 +188,7 @@ function ProjectModal({ project, onClose }: ProjectModalProps) {
 
 						<div className="mt-auto p-6 md:p-8 pt-4 border-t-2 border-neo-black bg-neo-white sticky bottom-0">
 							<button className="w-full py-4 bg-neo-black text-neo-white font-bold hover:bg-neo-lime hover:text-neo-black transition-colors shadow-neo hover:shadow-none hover:translate-x-1 hover:translate-y-1">
-								VISIT SITE ↗
+								VISIT SITE
 							</button>
 						</div>
 					</div>
