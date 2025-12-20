@@ -108,7 +108,13 @@ export default function Navbar() {
 									{item.name}
 								</span>
 
-								<span className="block font-bold text-lg tracking-wide absolute top-full left-1/2 -translate-x-1/2 w-full text-center transform transition-transform duration-300 ease-out group-hover:-translate-y-full text-neo-black">
+								<span
+									className={`
+                                        block font-bold text-lg tracking-wide absolute top-full left-1/2 -translate-x-1/2 w-full text-center 
+                                        transform transition-transform duration-300 ease-out group-hover:-translate-y-full
+                                        ${pathname === item.path ? 'text-white' : 'text-neo-black'}
+                                    `}
+								>
 									{item.name}
 								</span>
 							</div>
