@@ -49,7 +49,7 @@ export default function Home() {
 						Creative
 					</h1>
 				</div>
-				<div className="overflow-hidden">
+				<div>
 					<h1 className="hero-line text-[14vw] font-black leading-[0.85] tracking-tighter uppercase text-neo-black">
 						Developer<span className="text-neo-lime text-stroke-black">.</span>
 					</h1>

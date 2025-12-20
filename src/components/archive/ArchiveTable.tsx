@@ -251,7 +251,7 @@ const ProjectRow = ({ project, index, onClick, setHoveredColor, previewRef }: Pr
 				setHoveredColor(null);
 				if (previewRef.current) gsap.to(previewRef.current, { scale: 0, autoAlpha: 0, duration: 0.2 });
 			}}
-			className="group relative w-full border-b-4 border-neo-black bg-neo-white hover:bg-neo-black hover:text-neo-lime transition-colors duration-300 cursor-pointer overflow-hidden h-24 md:h-32 flex items-center px-4 md:px-8"
+			className="archive-row opacity-0 group relative w-full border-b-4 border-neo-black bg-neo-white hover:bg-neo-black hover:text-neo-lime transition-colors duration-300 cursor-pointer overflow-hidden h-24 md:h-32 flex items-center px-4 md:px-8"
 		>
 			<div
 				className={`flex w-full items-center justify-between pr-12 md:pr-16 transition-opacity duration-300 ${
@@ -313,7 +313,58 @@ export default function ArchiveTable() {
 
 	useGSAP(
 		() => {
-			gsap.fromTo(container.current, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.5 });
+			const tl = gsap.timeline({ delay: 1.2 });
+
+			tl.fromTo(
+				'.filter-container',
+				{
+					y: -20,
+					opacity: 0
+				},
+				{
+					y: 0,
+					opacity: 1,
+					duration: 0.6,
+					ease: 'power3.out'
+				}
+			);
+
+			tl.fromTo(
+				'.filter-btn',
+				{
+					opacity: 0,
+					y: -10
+				},
+				{
+					opacity: 1,
+					y: 0,
+					duration: 0.4,
+					stagger: 0.06,
+					ease: 'back.out(1.4)'
+				},
+				'-=0.4'
+			);
+
+			tl.fromTo(
+				'.archive-row',
+				{
+					x: 50,
+					opacity: 0
+				},
+				{
+					x: 0,
+					opacity: 1,
+					duration: 0.4,
+					stagger: 0.05,
+					ease: 'power2.out',
+					clearProps: 'transform'
+				},
+				'-=0.2'
+			);
+
+			gsap.set('.archive-row', { opacity: 0, x: 50 });
+			gsap.set('.filter-btn', { opacity: 0, y: -10 });
+			gsap.set('.filter-container', { y: -20, opacity: 0 });
 		},
 		{ scope: container }
 	);
@@ -338,12 +389,13 @@ export default function ArchiveTable() {
 				className="w-full"
 			>
 				<div className="flex justify-start mb-8 overflow-x-auto pb-2 md:pb-0">
-					<div className="inline-flex border-4 border-neo-black bg-neo-white shadow-neo">
+					<div className="filter-container inline-flex border-4 border-neo-black bg-neo-white shadow-neo">
 						{categories.map((cat, i) => (
 							<button
 								key={cat}
 								onClick={() => setFilter(cat)}
 								className={`
+                                    filter-btn
                                     px-6 py-3 font-bold font-mono text-sm uppercase transition-all whitespace-nowrap
                                     border-r-4 border-neo-black last:border-r-0
                                     ${

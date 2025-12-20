@@ -9,6 +9,10 @@ export default function CustomCursor() {
 	const followerRef = useRef<HTMLDivElement>(null);
 
 	useGSAP(() => {
+		const isDesktop = window.matchMedia('(pointer: fine)').matches;
+
+		if (!isDesktop) return;
+
 		document.body.style.cursor = 'none';
 
 		const xTo = gsap.quickTo(cursorRef.current, 'x', { duration: 0.1, ease: 'power3' });
@@ -56,11 +60,11 @@ export default function CustomCursor() {
 		<>
 			<div
 				ref={cursorRef}
-				className="fixed top-0 left-0 w-3 h-3 bg-neo-black rounded-full pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 mix-blend-difference"
+				className="hidden md:block fixed top-0 left-0 w-3 h-3 bg-neo-black rounded-full pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 mix-blend-difference"
 			/>
 			<div
 				ref={followerRef}
-				className="fixed top-0 left-0 w-8 h-8 border-2 border-neo-black rounded-full pointer-events-none z-[9998] -translate-x-1/2 -translate-y-1/2 opacity-50 transition-opacity duration-300"
+				className="hidden md:block fixed top-0 left-0 w-8 h-8 border-2 border-neo-black rounded-full pointer-events-none z-[9998] -translate-x-1/2 -translate-y-1/2 opacity-50 transition-opacity duration-300"
 			/>
 		</>
 	);

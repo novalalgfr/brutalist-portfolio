@@ -88,7 +88,15 @@ export default function HomeProjects() {
 								>
 									<div className="flex justify-between items-baseline mb-2">
 										<span className="font-mono text-xs md:text-sm opacity-50">0{i + 1}</span>
-										<span className="font-mono text-xs md:text-sm opacity-50">{p.year}</span>
+										<span
+											className={`
+        font-mono text-xs md:text-sm opacity-50 
+        transition-all duration-300 
+        ${activeProject === i ? 'mr-4' : ''}
+    `}
+										>
+											{p.year}
+										</span>
 									</div>
 									<h3 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none group-hover:italic">
 										{p.title}
