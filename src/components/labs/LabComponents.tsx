@@ -46,7 +46,7 @@ export const AccordionDemo = () => {
 			<div className="w-full max-w-[200px] border-2 border-neo-black bg-white shadow-neo">
 				<button
 					onClick={() => setIsOpen(!isOpen)}
-					className="w-full p-2 font-bold flex justify-between bg-neo-black text-neo-white hover:bg-neo-lime hover:text-neo-black transition-colors"
+					className="w-full p-2 font-bold flex justify-between bg-neo-white text-neo-black hover:bg-neo-lime hover:text-neo-black transition-colors"
 				>
 					<span>CLICK ME</span>
 					<span>{isOpen ? '-' : '+'}</span>

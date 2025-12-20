@@ -73,7 +73,7 @@ export default function SignalPage() {
 		}, 1000);
 
 		setTimeout(() => {
-			setButtonText('TRANSMISSION SUCCESS ✅');
+			setButtonText('TRANSMISSION SUCCESS');
 			setIsSending(false);
 			formRef.current?.reset();
 			setTimeout(() => setButtonText('INITIATE TRANSMISSION'), 3000);

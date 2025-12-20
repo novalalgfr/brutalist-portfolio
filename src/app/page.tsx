@@ -103,7 +103,7 @@ export default function Home() {
 				<h2 className="text-4xl md:text-7xl font-black uppercase mb-8">Have an Idea?</h2>
 				<Link
 					href="/signal"
-					className="inline-block bg-neo-black text-neo-white px-10 py-5 text-xl font-bold hover:bg-neo-lime hover:text-neo-black hover:scale-110 transition-all shadow-neo"
+					className="inline-block border-2 bg-neo-white text-neo-black px-10 py-5 text-xl font-bold hover:bg-neo-lime hover:text-neo-black hover:scale-110 transition-all shadow-neo"
 				>
 					INITIATE SIGNAL
 				</Link>
