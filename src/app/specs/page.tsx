@@ -135,13 +135,13 @@ export default function SpecsPage() {
 							<div className="flex flex-wrap gap-2">
 								{[
 									'Next.js',
-									'React',
 									'TypeScript',
 									'Tailwind',
 									'GSAP',
+									'React',
 									'Node.js',
 									'Figma',
-									'Blender'
+									'Vercel'
 								].map((tech) => (
 									<span
 										key={tech}

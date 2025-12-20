@@ -3,6 +3,7 @@
 import { useRef, useState, useEffect } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import Image from 'next/image';
 
 interface Project {
 	year: string;
@@ -12,17 +13,21 @@ interface Project {
 	color: string;
 	status: string;
 	desc: string;
+	image: string;
+	link?: string;
 }
 
 const allProjects: Project[] = [
 	{
-		year: '2025',
-		title: 'E-COMMERCE DASHBOARD',
-		category: 'WEB APP',
-		stack: 'Next.js, Prisma',
-		color: '#FF6B6B',
+		year: '2024',
+		title: 'Portal SPMB Kota Bogor',
+		category: 'WEBSITE',
+		stack: 'Next.js',
+		color: '#4d80f6ff',
 		status: 'LIVE',
-		desc: 'A comprehensive dashboard for managing sales, inventory, and customer data.'
+		desc: 'A comprehensive dashboard for managing sales, inventory, and customer data.',
+		image: '/archive/spmb-bogor.png',
+		link: 'https://spmb.kotabogor.go.id'
 	},
 	{
 		year: '2025',
@@ -31,7 +36,8 @@ const allProjects: Project[] = [
 		stack: 'Python, TensorFlow',
 		color: '#4ECDC4',
 		status: 'DEV',
-		desc: 'CNN model to classify 15 types of Batik motifs with high accuracy.'
+		desc: 'CNN model to classify 15 types of Batik motifs with high accuracy.',
+		image: '/projects/batik-ai.jpg'
 	},
 	{
 		year: '2024',
@@ -40,7 +46,8 @@ const allProjects: Project[] = [
 		stack: 'Laravel, MySQL',
 		color: '#FFE66D',
 		status: 'LIVE',
-		desc: 'Custom POS and Inventory system for retail store.'
+		desc: 'Custom POS and Inventory system for retail store.',
+		image: '/projects/sinar-plastik.jpg'
 	},
 	{
 		year: '2024',
@@ -49,7 +56,8 @@ const allProjects: Project[] = [
 		stack: 'Java Swing, Hibernate',
 		color: '#1A535C',
 		status: 'OFFLINE',
-		desc: 'Desktop project management tool.'
+		desc: 'Desktop project management tool.',
+		image: '/projects/taskflow.jpg'
 	},
 	{
 		year: '2024',
@@ -58,7 +66,8 @@ const allProjects: Project[] = [
 		stack: 'React, Tailwind',
 		color: '#FF9F1C',
 		status: 'LIVE',
-		desc: 'High-conversion landing page with WebGL.'
+		desc: 'High-conversion landing page with WebGL.',
+		image: '/projects/crypto-lp.jpg'
 	},
 	{
 		year: '2023',
@@ -67,7 +76,8 @@ const allProjects: Project[] = [
 		stack: 'Python, Scikit-Learn',
 		color: '#2EC4B6',
 		status: 'DEV',
-		desc: 'Predictive modeling for rainfall intensity.'
+		desc: 'Predictive modeling for rainfall intensity.',
+		image: '/projects/rainfall.jpg'
 	},
 	{
 		year: '2023',
@@ -76,7 +86,8 @@ const allProjects: Project[] = [
 		stack: 'PHP, Bootstrap',
 		color: '#E71D36',
 		status: 'LIVE',
-		desc: 'Student admission portal.'
+		desc: 'Student admission portal.',
+		image: '/projects/spmb.jpg'
 	},
 	{
 		year: '2023',
@@ -85,7 +96,8 @@ const allProjects: Project[] = [
 		stack: 'Next.js, Framer',
 		color: '#7209B7',
 		status: 'LIVE',
-		desc: 'Aesthetic portfolio for wedding service.'
+		desc: 'Aesthetic portfolio for wedding service.',
+		image: '/projects/wedding.jpg'
 	}
 ];
 
@@ -141,22 +153,18 @@ function ProjectModal({ project, onClose }: ProjectModalProps) {
 				</div>
 
 				<div className="flex-1 flex flex-col md:flex-row min-h-0 overflow-hidden">
-					<div className="w-full md:w-3/4 bg-gray-200 h-full overflow-y-auto border-b-4 md:border-b-0 md:border-r-4 border-neo-black relative flex flex-col">
-						<div
-							className="h-[400px] w-full flex items-center justify-center text-neo-black font-black text-4xl p-10 text-center shrink-0"
-							style={{ backgroundColor: project.color }}
-						>
-							HERO IMAGE <br /> {project.title}
-						</div>
-						<div className="flex-1 bg-white p-10 space-y-10 min-h-[1000px]">
-							<div className="h-64 bg-gray-100 border-2 border-dashed border-gray-300 flex items-center justify-center text-gray-400">
-								Section 1: UI Components
-							</div>
-							<div className="h-64 bg-gray-100 border-2 border-dashed border-gray-300 flex items-center justify-center text-gray-400">
-								Section 2: Mobile View
-							</div>
-							<div className="h-64 bg-gray-100 border-2 border-dashed border-gray-300 flex items-center justify-center text-gray-400">
-								Section 3: Feature Breakdown
+					<div className="w-full md:w-3/4 h-full bg-gray-100 border-b-4 md:border-b-0 md:border-r-4 border-neo-black overflow-y-auto overflow-x-hidden">
+						<div className="w-full min-h-full flex items-start justify-center p-4 md:p-8">
+							<div className="w-full max-w-6xl relative">
+								<Image
+									src={project.image}
+									alt={project.title}
+									width={1920}
+									height={1080}
+									priority
+									sizes="(max-width: 768px) 100vw, 75vw"
+									className="w-full h-auto object-contain border-4 border-neo-black shadow-lg"
+								/>
 							</div>
 						</div>
 					</div>
@@ -187,7 +195,10 @@ function ProjectModal({ project, onClose }: ProjectModalProps) {
 						</div>
 
 						<div className="mt-auto p-6 md:p-8 pt-4 border-t-2 border-neo-black bg-neo-white sticky bottom-0">
-							<button className="w-full py-4 bg-neo-black text-neo-white font-bold hover:bg-neo-lime hover:text-neo-black transition-colors shadow-neo hover:shadow-none hover:translate-x-1 hover:translate-y-1">
+							<button
+								className="w-full py-4 bg-neo-white text-neo-black font-bold border-2 hover:bg-neo-lime hover:text-neo-black transition-colors shadow-neo hover:shadow-none hover:translate-x-1 hover:translate-y-1"
+								onClick={() => window.open(project.link, '_blank')}
+							>
 								VISIT SITE
 							</button>
 						</div>
@@ -222,7 +233,7 @@ const ProjectRow = ({ project, index, onClick, setHoveredColor, previewRef }: Pr
 			const tl = gsap.to(marqueeRef.current, {
 				xPercent: -50,
 				repeat: -1,
-				duration: duration,
+				duration,
 				ease: 'linear',
 				paused: true
 			});
@@ -313,46 +324,35 @@ export default function ArchiveTable() {
 
 	useGSAP(
 		() => {
-			gsap.set('.filter-container', { opacity: 0 });
-			gsap.set('.archive-row', {
-				transformPerspective: 1000,
-				rotationX: -90,
-				transformOrigin: 'top center',
-				opacity: 0,
-				y: 50
-			});
+			gsap.killTweensOf('.archive-row');
 
-			const tl = gsap.timeline({ delay: 0.2 });
-
-			tl.to('.filter-container', { opacity: 1, duration: 0.5 });
-			tl.fromTo(
-				'.filter-btn',
-				{ scale: 0, rotation: 10 },
-				{ scale: 1, rotation: 0, stagger: 0.05, ease: 'back.out(1.7)' },
-				'<'
-			);
-
-			tl.to(
+			gsap.fromTo(
 				'.archive-row',
+				{ opacity: 0, y: 20 },
 				{
-					rotationX: 0,
-					y: 0,
 					opacity: 1,
-					duration: 0.8,
-					stagger: 0.08,
-					ease: 'back.out(1.2)',
-					clearProps: 'transform'
-				},
-				'-=0.3'
+					y: 0,
+					duration: 0.4,
+					stagger: 0.05,
+					ease: 'power2.out',
+					overwrite: 'auto'
+				}
 			);
+
+			gsap.to('.filter-container', { opacity: 1, duration: 0.3 });
 		},
-		{ scope: container }
+		{ scope: container, dependencies: [filter] }
 	);
 
 	useEffect(() => {
 		const movePreview = (e: MouseEvent) => {
 			if (!previewRef.current || selectedProject) return;
-			gsap.to(previewRef.current, { x: e.clientX + 20, y: e.clientY + 20, duration: 0.3, ease: 'power3.out' });
+			gsap.to(previewRef.current, {
+				x: e.clientX + 20,
+				y: e.clientY + 20,
+				duration: 0.3,
+				ease: 'power3.out'
+			});
 		};
 		window.addEventListener('mousemove', movePreview);
 		return () => window.removeEventListener('mousemove', movePreview);
@@ -370,20 +370,15 @@ export default function ArchiveTable() {
 			>
 				<div className="flex justify-start mb-8 overflow-x-auto pb-2 md:pb-0">
 					<div className="filter-container inline-flex border-4 border-neo-black bg-neo-white shadow-neo">
-						{categories.map((cat, i) => (
+						{categories.map((cat) => (
 							<button
 								key={cat}
 								onClick={() => setFilter(cat)}
-								className={`
-                                    filter-btn
-                                    px-6 py-3 font-bold font-mono text-sm uppercase transition-all whitespace-nowrap
-                                    border-r-4 border-neo-black last:border-r-0
-                                    ${
-										filter === cat
-											? 'bg-neo-black text-neo-lime'
-											: 'bg-neo-white text-neo-black hover:bg-neo-lime'
-									}
-                                `}
+								className={`px-6 py-3 font-bold font-mono text-sm uppercase transition-all whitespace-nowrap border-r-4 border-neo-black last:border-r-0 ${
+									filter === cat
+										? 'bg-neo-black text-neo-lime'
+										: 'bg-neo-white text-neo-black hover:bg-neo-lime'
+								}`}
 							>
 								{cat}
 							</button>
