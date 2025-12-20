@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
 'use client';
 
-import ArchiveTable from '@/components/ArchiveTable';
+import ArchiveTable from '@/components/archive/ArchiveTable';
 import { useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';

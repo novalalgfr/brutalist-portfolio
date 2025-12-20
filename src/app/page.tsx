@@ -3,11 +3,11 @@
 import { useRef, useState, useEffect } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import Marquee from '@/components/Marquee';
-import HomeProjects from '@/components/HomeProjects';
-import TheProcess from '@/components/TheProcess';
-import TechArsenal from '@/components/TechArsenal';
-import WhatIDo from '@/components/WhatIDo';
+import Marquee from '@/components/ui/Marquee';
+import HomeProjects from '@/components/home/HomeProjects';
+import TheProcess from '@/components/home/TheProcess';
+import TechArsenal from '@/components/home/TechArsenal';
+import WhatIDo from '@/components/home/WhatIDo';
 
 export default function Home() {
 	const container = useRef(null);

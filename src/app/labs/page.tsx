@@ -3,8 +3,8 @@
 import { useRef, useState } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import TransitionCurtain from '@/components/TransitionCurtain';
-import { experiments } from '@/components/labsData';
+import TransitionCurtain from '@/components/transitions/TransitionCurtain';
+import { experiments } from '@/components/labs/labsData';
 
 export default function LabsPage() {
 	const container = useRef(null);
