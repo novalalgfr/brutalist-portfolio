@@ -15,12 +15,12 @@ export default function Footer() {
 				</div>
 
 				<div className="flex flex-col gap-6 text-right">
-					<a
+					{/* <a
 						href="mailto:email@anda.com"
 						className="text-2xl md:text-3xl font-bold hover:text-neo-lime hover:underline decoration-4 underline-offset-4 transition-colors"
 					>
 						hello@portfolio.com
-					</a>
+					</a> */}
 
 					<div className="flex gap-4 justify-end">
 						{['LINKEDIN', 'GITHUB', 'INSTAGRAM'].map((social) => (

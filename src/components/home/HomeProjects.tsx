@@ -1,143 +1,135 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useState, useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 
 const projects = [
 	{
-		id: 1,
-		title: 'E-COMMERCE DASHBOARD',
-		category: 'WEB APP',
+		id: '01',
+		title: 'E-COMMERCE',
+		category: 'WEB APPLICATION',
 		year: '2025',
-		color: '#FF6B6B'
+		img: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1000&auto=format&fit=crop'
 	},
 	{
-		id: 2,
-		title: 'CRYPTO LANDING PAGE',
-		category: 'LANDING PAGE',
-		year: '2024',
-		color: '#4ECDC4'
-	},
-	{
-		id: 3,
-		title: 'INTERACTIVE MAP 3D',
-		category: 'EXPERIMENT',
-		year: '2024',
-		color: '#FFE66D'
-	},
-	{
-		id: 4,
-		title: 'BATIK CLASSIFIER AI',
+		id: '02',
+		title: 'BATIK AI',
 		category: 'MACHINE LEARNING',
-		year: '2023',
-		color: '#1A535C'
+		year: '2025',
+		img: 'https://images.unsplash.com/photo-1515630278258-407f66498911?q=80&w=1000&auto=format&fit=crop'
+	},
+	{
+		id: '03',
+		title: 'SINAR PLASTIK',
+		category: 'POS SYSTEM',
+		year: '2024',
+		img: 'https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?q=80&w=1000&auto=format&fit=crop'
+	},
+	{
+		id: '04',
+		title: 'TASKFLOW',
+		category: 'JAVA DESKTOP',
+		year: '2024',
+		img: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=1000&auto=format&fit=crop'
 	}
 ];
 
 export default function HomeProjects() {
-	const container = useRef<HTMLDivElement>(null);
-	const cursorLabel = useRef<HTMLDivElement>(null);
-	const [activeProject, setActiveProject] = useState<number | null>(null);
+	const [activeProject, setActiveProject] = useState(0);
+	const container = useRef(null);
 
 	useGSAP(
 		() => {
-			const moveCursor = (e: MouseEvent) => {
-				gsap.to(cursorLabel.current, {
-					x: e.clientX,
-					y: e.clientY,
-					duration: 0.5,
-					ease: 'power2.out'
-				});
-			};
-
-			window.addEventListener('mousemove', moveCursor);
-
-			return () => {
-				window.removeEventListener('mousemove', moveCursor);
-			};
+			gsap.fromTo(
+				'.project-img',
+				{ opacity: 0.5, scale: 1.05 },
+				{ opacity: 1, scale: 1, duration: 0.4, ease: 'power2.out' }
+			);
 		},
-		{ scope: container }
+		{ scope: container, dependencies: [activeProject] }
 	);
-
-	const handleMouseEnter = (index: number) => {
-		setActiveProject(index);
-		gsap.to(cursorLabel.current, { scale: 1, duration: 0.3, ease: 'back.out(1.7)' });
-	};
-
-	const handleMouseLeave = () => {
-		setActiveProject(null);
-		gsap.to(cursorLabel.current, { scale: 0, duration: 0.3 });
-	};
 
 	return (
 		<section
 			ref={container}
-			className="relative py-20 bg-neo-bg border-t-4 border-neo-black"
+			className="relative py-20 px-4 md:px-10 bg-neo-bg"
 		>
-			<div className="w-full px-4 md:px-10 mb-10 flex items-end justify-between">
-				<h2 className="text-4xl md:text-6xl font-black italic tracking-tighter">
-					SELECTED <br /> WORKS
-				</h2>
-				<span className="hidden md:block font-mono text-sm">(HOVER TO PREVIEW)</span>
-			</div>
-
-			<div className="flex flex-col border-b-4 border-neo-black">
-				{projects.map((project, index) => (
-					<Link
-						key={project.id}
-						href="/archive"
-						className="group relative flex items-center justify-between px-4 md:px-10 py-8 border-t-4 border-neo-black bg-neo-bg hover:bg-neo-white transition-colors duration-300 overflow-hidden"
-						onMouseEnter={() => handleMouseEnter(index)}
-						onMouseLeave={handleMouseLeave}
-					>
-						<div className="absolute inset-0 bg-neo-black translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-in-out z-0" />
-
-						<div className="relative z-10 flex flex-col md:flex-row md:items-center gap-2 md:gap-10 w-full group-hover:pl-4 transition-all duration-300">
-							<span className="font-mono text-sm text-neo-black group-hover:text-neo-lime">
-								0{index + 1}/
-							</span>
-							<h3 className="text-3xl md:text-5xl font-black uppercase text-neo-black group-hover:text-neo-lime group-hover:italic transition-all">
-								{project.title}
-							</h3>
-						</div>
-
-						<div className="relative z-10 hidden md:flex flex-col items-end">
-							<span className="font-bold text-neo-black group-hover:text-neo-white">
-								{project.category}
-							</span>
-							<span className="font-mono text-xs text-neo-black group-hover:text-neo-lime">
-								{project.year}
-							</span>
-						</div>
-
-						<span className="md:hidden relative z-10 text-2xl group-hover:text-neo-lime">→</span>
-					</Link>
-				))}
-			</div>
-
-			<div className="flex justify-center mt-12">
-				<Link
-					href="/archive"
-					className="px-8 py-4 bg-neo-lime border-4 border-neo-black font-bold shadow-neo hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all"
-				>
-					VIEW FULL ARCHIVE
-				</Link>
-			</div>
-
-			<div
-				ref={cursorLabel}
-				className="fixed top-0 left-0 w-[300px] h-[200px] bg-neo-black border-4 border-neo-black z-50 pointer-events-none hidden md:flex items-center justify-center overflow-hidden -translate-x-1/2 -translate-y-1/2 scale-0 origin-center"
-			>
-				{activeProject !== null && (
-					<div
-						className="w-full h-full flex items-center justify-center text-neo-black font-bold text-2xl text-center p-4"
-						style={{ backgroundColor: projects[activeProject].color }}
-					>
-						PREVIEW IMAGE <br /> {projects[activeProject].title}
+			<div className="flex flex-col md:flex-row gap-10">
+				<div className="w-full md:w-1/2 z-10">
+					<div className="mb-10">
+						<h2 className="text-4xl md:text-6xl font-black uppercase leading-none mb-2">
+							Selected
+							<br />
+							Works.
+						</h2>
+						<p className="font-mono text-xs opacity-60">HOVER TO PREVIEW /// CLICK TO EXPLORE</p>
 					</div>
-				)}
+
+					<div className="flex flex-col">
+						{projects.map((p, i) => (
+							<Link
+								key={i}
+								href="/archive"
+							>
+								<div
+									data-cursor-text="VIEW"
+									onMouseEnter={() => setActiveProject(i)}
+									className={`
+                                    group border-t-4 border-neo-black py-8 transition-all duration-300
+                                    ${
+										activeProject === i
+											? 'bg-neo-black text-neo-lime pl-4'
+											: 'hover:bg-gray-200 hover:pl-2'
+									}
+                                `}
+								>
+									<div className="flex justify-between items-baseline mb-2">
+										<span className="font-mono text-xs md:text-sm opacity-50">0{i + 1}</span>
+										<span className="font-mono text-xs md:text-sm opacity-50">{p.year}</span>
+									</div>
+									<h3 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none group-hover:italic">
+										{p.title}
+									</h3>
+									<div className="mt-2 flex justify-between items-center opacity-0 group-hover:opacity-100 transition-opacity">
+										<span className="font-mono text-xs bg-neo-lime text-neo-black px-1 font-bold">
+											{p.category}
+										</span>
+										<span className="text-xl mr-4">↗</span>
+									</div>
+								</div>
+							</Link>
+						))}
+						<div className="border-t-4 border-neo-black" />
+					</div>
+				</div>
+
+				<div className="hidden md:block w-1/2 relative">
+					<div className="sticky top-24 h-[60vh] w-full border-4 border-neo-black bg-neo-black p-2 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+						<div className="absolute top-4 left-4 z-20 flex gap-2">
+							<div className="w-3 h-3 rounded-full bg-red-500 border border-black" />
+							<div className="w-3 h-3 rounded-full bg-yellow-500 border border-black" />
+							<div className="w-3 h-3 rounded-full bg-green-500 border border-black" />
+						</div>
+						<div className="absolute bottom-4 right-4 z-20 bg-neo-black text-neo-white px-2 py-1 font-mono text-xs border border-neo-white">
+							IMG_PREVIEW: {projects[activeProject].id}
+						</div>
+
+						<div className="relative w-full h-full overflow-hidden bg-gray-800 border-2 border-gray-700">
+							<div className="absolute inset-0 z-10 opacity-20 bg-[linear-gradient(rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
+
+							<Image
+								key={activeProject}
+								src={projects[activeProject].img}
+								alt={projects[activeProject].title}
+								fill
+								className="project-img object-cover filter grayscale hover:grayscale-0 transition-all duration-500"
+							/>
+						</div>
+					</div>
+				</div>
 			</div>
 		</section>
 	);

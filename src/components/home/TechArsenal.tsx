@@ -1,28 +1,19 @@
+/* eslint-disable react/jsx-no-comment-textnodes */
 'use client';
 
 import { useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-// Register Plugin Wajib
-gsap.registerPlugin(ScrollTrigger);
 
 const stack = [
-	'NEXT.JS 15',
-	'REACT',
-	'TYPESCRIPT',
-	'TAILWIND CSS',
-	'GSAP',
-	'FRAMER MOTION',
-	'NODE.JS',
-	'POSTGRESQL',
-	'PRISMA',
-	'FIGMA',
-	'GIT',
-	'VERCEL',
-	'DOCKER',
-	'AWS'
+	{ name: 'NEXT.JS', type: 'FRAMEWORK', ver: '14.0' },
+	{ name: 'TYPESCRIPT', type: 'LANGUAGE', ver: '5.3' },
+	{ name: 'TAILWIND', type: 'STYLING', ver: '3.4' },
+	{ name: 'GSAP', type: 'ANIMATION', ver: '3.12' },
+	{ name: 'REACT', type: 'LIBRARY', ver: '18.2' },
+	{ name: 'NODE.JS', type: 'RUNTIME', ver: '20.x' },
+	{ name: 'FIGMA', type: 'DESIGN', ver: 'CC' },
+	{ name: 'VERCEL', type: 'DEPLOY', ver: 'PRO' }
 ];
 
 export default function TechArsenal() {
@@ -30,28 +21,17 @@ export default function TechArsenal() {
 
 	useGSAP(
 		() => {
-			gsap.fromTo(
-				'.tech-tag',
-				{
-					scale: 0,
-					autoAlpha: 0
+			gsap.from('.tech-box', {
+				scrollTrigger: {
+					trigger: container.current,
+					start: 'top 80%'
 				},
-				{
-					scrollTrigger: {
-						trigger: container.current,
-						start: 'top 85%'
-					},
-					scale: 1,
-					autoAlpha: 1,
-					stagger: {
-						amount: 0.5,
-						from: 'random'
-					},
-					duration: 0.5,
-					ease: 'back.out(1.5)',
-					overwrite: 'auto'
-				}
-			);
+				y: 50,
+				opacity: 0,
+				stagger: 0.1,
+				duration: 0.8,
+				ease: 'power3.out'
+			});
 		},
 		{ scope: container }
 	);
@@ -59,32 +39,48 @@ export default function TechArsenal() {
 	return (
 		<section
 			ref={container}
-			className="w-full px-4 md:px-10 py-20"
+			className="py-20 px-4 md:px-10 bg-neo-white border-t-4 border-neo-black"
 		>
-			<div className="flex flex-col md:flex-row gap-10">
-				<div className="md:w-1/3">
-					<h2 className="text-4xl md:text-6xl font-black italic tracking-tighter leading-none mb-4">
-						TECH <br /> ARSENAL.
-					</h2>
-					<p className="font-mono text-sm max-w-xs">
-						The weapons of choice for conquering digital challenges. Always updated, always lethal.
-					</p>
+			<div className="flex flex-col md:flex-row justify-between items-end mb-10 border-b-4 border-neo-black pb-6">
+				<div>
+					<span className="font-mono text-xs bg-neo-black text-neo-lime px-2 py-1">SYSTEM_DEPENDENCIES</span>
+					<h2 className="text-5xl md:text-8xl font-black uppercase mt-2 leading-[0.85]">The Arsenal</h2>
 				</div>
+				<div className="mt-4 md:mt-0 text-right font-mono text-xs md:text-sm opacity-60 max-w-xs">
+					// FULLY OPTIMIZED STACK <br />
+					// READY FOR PRODUCTION <br />
+					// SCALABLE ARCHITECTURE
+				</div>
+			</div>
 
-				<div className="md:w-2/3 flex flex-wrap gap-3 content-start">
-					{stack.map((tech, i) => (
-						<div
-							key={i}
-							className="tech-tag px-6 py-3 border-2 border-neo-black bg-neo-white font-bold text-lg uppercase shadow-neo hover:bg-neo-lime hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all cursor-default select-none invisible"
-						>
-							{tech}
+			<div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full">
+				{stack.map((item, i) => (
+					<div
+						key={i}
+						className="tech-box group relative bg-neo-bg border-4 border-neo-black aspect-square md:aspect-[4/3] flex flex-col justify-between p-4 hover:bg-neo-black hover:text-neo-lime transition-colors duration-300 shadow-neo hover:shadow-none hover:translate-x-1 hover:translate-y-1"
+					>
+						<div className="absolute top-0 right-0 p-2">
+							<div className="w-2 h-2 bg-neo-black group-hover:bg-neo-lime" />
 						</div>
-					))}
 
-					<div className="tech-tag px-6 py-3 border-2 border-neo-black bg-neo-black text-neo-lime font-bold text-lg uppercase invisible">
-						AND MORE...
+						<div className="flex justify-between items-start border-b-2 border-neo-black/10 pb-2 mb-2 group-hover:border-neo-lime/30">
+							<span className="font-mono text-[10px] font-bold">0{i + 1}</span>
+							<span className="font-mono text-[10px] opacity-50">{item.ver}</span>
+						</div>
+
+						<div className="flex-grow flex items-center justify-center">
+							<span className="font-black text-2xl md:text-3xl tracking-tighter uppercase text-center group-hover:scale-110 transition-transform duration-300">
+								{item.name}
+							</span>
+						</div>
+
+						<div className="text-center">
+							<span className="font-mono text-[10px] bg-gray-200 px-2 py-1 group-hover:bg-neo-lime group-hover:text-neo-black transition-colors border border-neo-black">
+								{item.type}
+							</span>
+						</div>
 					</div>
-				</div>
+				))}
 			</div>
 		</section>
 	);
