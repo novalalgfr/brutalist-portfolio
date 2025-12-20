@@ -145,7 +145,7 @@ export default function LabsPage() {
 									onClick={() => handleCopy(exp.code, exp.id)}
 									className="text-xs font-bold hover:bg-[#FFD700] px-2 py-1 transition-colors"
 								>
-									COPY SNIPPET 📋
+									COPY SNIPPET
 								</button>
 							</div>
 						</div>
