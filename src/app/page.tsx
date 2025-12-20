@@ -40,7 +40,7 @@ export default function Home() {
 			<section className="h-screen flex flex-col justify-center px-4 md:px-10 pt-20">
 				<div className="overflow-hidden">
 					<span className="hero-line block font-mono text-sm md:text-base mb-4 opacity-60">
-						// FULLSTACK_DEVELOPER // BASED_IN_JAKARTA
+						// FRONTEND_DEVELOPER // BASED_IN_JAKARTA
 					</span>
 				</div>
 

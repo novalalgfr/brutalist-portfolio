@@ -88,9 +88,9 @@ export default function SpecsPage() {
 					<div className="spec-card bg-neo-black text-neo-white p-6 border-4 border-neo-black shadow-neo">
 						<h3 className="text-neo-lime font-bold font-mono mb-4 text-xl">// BIO_DATA</h3>
 						<p className="font-mono text-sm leading-relaxed opacity-80">
-							Frontend Dev & UI/UX Designer specializing in public sector digitization. I architect
-							intuitive government portals and education systems (SPMB) using React, Next.js, and Tailwind
-							CSS.
+							Hey, I&apos;m Noval — a Frontend Dev & UI/UX Designer specializing in public sector
+							digitization. I architect intuitive government portals and education systems (SPMB) using
+							React, Next.js, and Tailwind CSS.
 							<br />
 							<br />
 							Focused on transforming complex administrative workflows into responsive, user-centric web

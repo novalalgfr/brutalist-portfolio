@@ -10,8 +10,6 @@ interface Project {
 	title: string;
 	category: string;
 	stack: string;
-	color: string;
-	status: string;
 	desc: string;
 	image: string;
 	link?: string;
@@ -19,89 +17,81 @@ interface Project {
 
 const allProjects: Project[] = [
 	{
-		year: '2024',
-		title: 'Portal SPMB Kota Bogor',
+		year: '2025',
+		title: 'Portal SPMB Kota Bogor 2026',
 		category: 'WEBSITE',
-		stack: 'Next.js',
-		color: '#4d80f6ff',
-		status: 'LIVE',
-		desc: 'A comprehensive dashboard for managing sales, inventory, and customer data.',
-		image: '/archive/spmb-bogor.png',
-		link: 'https://spmb.kotabogor.go.id'
+		stack: 'Laravel Inertia',
+		desc: 'Developed the 2026 SPMB Portal for Bogor City with significant improvements from the previous version, separating SD and SMP level navigation with distinct visual branding using unique color schemes for each level, and implementing card data components as an alternative to table displays to enhance responsiveness and information readability on mobile devices.',
+		image: '/archive/spmb-bogor-2026.jpg'
 	},
 	{
 		year: '2025',
-		title: 'BATIK CLASSIFIER AI',
-		category: 'ML / AI',
-		stack: 'Python, TensorFlow',
-		color: '#4ECDC4',
-		status: 'DEV',
-		desc: 'CNN model to classify 15 types of Batik motifs with high accuracy.',
-		image: '/projects/batik-ai.jpg'
-	},
-	{
-		year: '2024',
-		title: 'SINAR PLASTIK STORE',
-		category: 'WEB APP',
-		stack: 'Laravel, MySQL',
-		color: '#FFE66D',
-		status: 'LIVE',
-		desc: 'Custom POS and Inventory system for retail store.',
-		image: '/projects/sinar-plastik.jpg'
-	},
-	{
-		year: '2024',
-		title: 'TASKFLOW DESKTOP',
+		title: 'Orbit App',
 		category: 'SOFTWARE',
-		stack: 'Java Swing, Hibernate',
-		color: '#1A535C',
-		status: 'OFFLINE',
-		desc: 'Desktop project management tool.',
-		image: '/projects/taskflow.jpg'
+		stack: 'Java, Spring, Hibernate, Java Swing, FlatLaf',
+		desc: "Developed a desktop project management application called 'Orbit' as a centralized ticketing system solution to address inefficiencies in manual task management methods, built using Java with MVC architecture implementation, Spring Framework for dependency injection, Hibernate ORM for database management, and Java Swing with FlatLaf for modern interface, enabling real-time task status monitoring, clear work distribution, and enhanced project progress transparency to support more structured and productive team collaboration.",
+		image: '/archive/orbit-app.png'
+	},
+	{
+		year: '2025',
+		title: 'Toko Sinar Plastik',
+		category: 'WEBSITE',
+		stack: 'Next.js',
+		desc: 'Led a team as Product Manager in developing an integrated e-commerce website with Point of Sale (POS) system, managing product roadmap, coordinating between developer and designer teams, and ensuring timely delivery of key features including inventory management, payment gateway, and real-time sales tracking aligned with business requirements.',
+		image: '/archive/sinar-plastik.jpg'
+	},
+	{
+		year: '2025',
+		title: 'Authentication and Classification of Yogyakarta Batik',
+		category: 'ML / AI',
+		stack: 'EfficienNet, TensorFlow, Python',
+		desc: 'Developed a machine learning-based authentication and classification system for Yogyakarta batik using EfficientNetB0 architecture for image classification, with full-stack implementation including responsive Next.js frontend and Flask backend as REST API, achieving high accuracy in identifying and classifying various traditional Yogyakarta batik patterns.',
+		image: '/archive/batik-yogya.jpg'
+	},
+	{
+		year: '2025',
+		title: 'Portal SPMB Kota Bogor 2025',
+		category: 'WEBSITE',
+		stack: 'Next.js',
+		desc: "Developed a comprehensive informational portal for Bogor City's 2025 SPMB program serving elementary and junior high school levels, providing centralized access to registration schedules, administrative requirements, enrollment procedures, result announcements, and complete admission guidelines for parents and prospective students.",
+		image: '/archive/spmb-bogor-2025.jpg'
+	},
+	{
+		year: '2025',
+		title: 'Portal SPMB Kota Cilegon 2025',
+		category: 'WEBSITE',
+		stack: 'Next.js',
+		desc: "Built an integrated information portal for Cilegon City's 2025 SPMB program for elementary and junior high school levels, presenting unified information on registration schedules, document requirements, selection mechanisms, result publications, and comprehensive admission guidelines to assist parents and prospective students.",
+		image: '/archive/spmb-cilegon-2025.jpg'
+	},
+	{
+		year: '2025',
+		title: 'Portal SPMB Kota Palembang 2025',
+		category: 'WEBSITE',
+		stack: 'Next.js',
+		desc: "Designed a comprehensive information portal for Palembang City's 2025 SPMB program covering elementary and junior high school levels, delivering complete information on registration timelines, administrative provisions, selection stages, acceptance announcements, and detailed admission guidelines for the community and prospective students.",
+		image: '/archive/spmb-palembang-2025.jpg'
 	},
 	{
 		year: '2024',
-		title: 'CRYPTO LANDING PAGE',
+		title: 'Sistem Informasi Pendidikan Kab. Mimika',
 		category: 'WEBSITE',
-		stack: 'React, Tailwind',
-		color: '#FF9F1C',
-		status: 'LIVE',
-		desc: 'High-conversion landing page with WebGL.',
-		image: '/projects/crypto-lp.jpg'
+		stack: 'React.js',
+		desc: 'Developed an educator information system for Mimika Regency that provides comprehensive data on all schools across education levels, covering institutional profiles, educator information, facilities, and education statistics to enhance transparency and accessibility of educational information throughout the Mimika region.',
+		image: '/archive/sip-mimika.jpg'
 	},
 	{
-		year: '2023',
-		title: 'RAINFALL SIMULATION',
-		category: 'ML / AI',
-		stack: 'Python, Scikit-Learn',
-		color: '#2EC4B6',
-		status: 'DEV',
-		desc: 'Predictive modeling for rainfall intensity.',
-		image: '/projects/rainfall.jpg'
-	},
-	{
-		year: '2023',
-		title: 'PORTAL SPMB BOGOR',
+		year: '2024',
+		title: 'Company Profile Mardawa',
 		category: 'WEBSITE',
-		stack: 'PHP, Bootstrap',
-		color: '#E71D36',
-		status: 'LIVE',
-		desc: 'Student admission portal.',
-		image: '/projects/spmb.jpg'
-	},
-	{
-		year: '2023',
-		title: 'WEDDING PRESET W.',
-		category: 'WEBSITE',
-		stack: 'Next.js, Framer',
-		color: '#7209B7',
-		status: 'LIVE',
-		desc: 'Aesthetic portfolio for wedding service.',
-		image: '/projects/wedding.jpg'
+		stack: 'FIGMA',
+		desc: "Designed the UI/UX interface for PT Mardawa Intiguna Persada's corporate profile website, presenting the company's identity professionally through modern design, intuitive navigation, and optimal user experience to strengthen brand presence on digital platforms.",
+		image: '/archive/mardawa.jpg',
+		link: 'https://spmb.kotabogor.go.id'
 	}
 ];
 
-const categories = ['ALL', 'WEBSITE', 'WEB APP', 'SOFTWARE', 'ML / AI'];
+const categories = ['ALL', 'WEBSITE', 'SOFTWARE', 'ML / AI'];
 
 interface ProjectModalProps {
 	project: Project;
@@ -194,14 +184,16 @@ function ProjectModal({ project, onClose }: ProjectModalProps) {
 							</div>
 						</div>
 
-						<div className="mt-auto p-6 md:p-8 pt-4 border-t-2 border-neo-black bg-neo-white sticky bottom-0">
-							<button
-								className="w-full py-4 bg-neo-white text-neo-black font-bold border-2 hover:bg-neo-lime hover:text-neo-black transition-colors shadow-neo hover:shadow-none hover:translate-x-1 hover:translate-y-1"
-								onClick={() => window.open(project.link, '_blank')}
-							>
-								VISIT SITE
-							</button>
-						</div>
+						{project.link && (
+							<div className="mt-auto p-6 md:p-8 pt-4 border-t-2 border-neo-black bg-neo-white sticky bottom-0">
+								<button
+									className="w-full py-4 bg-neo-white text-neo-black font-bold border-2 hover:bg-neo-lime hover:text-neo-black transition-colors shadow-neo hover:shadow-none hover:translate-x-1 hover:translate-y-1"
+									onClick={() => window.open(project.link, '_blank')}
+								>
+									VISIT SITE
+								</button>
+							</div>
+						)}
 					</div>
 				</div>
 			</div>
@@ -213,11 +205,11 @@ interface ProjectRowProps {
 	project: Project;
 	index: number;
 	onClick: () => void;
-	setHoveredColor: (color: string | null) => void;
+	setHoveredProject: (project: Project | null) => void;
 	previewRef: React.RefObject<HTMLDivElement | null>;
 }
 
-const ProjectRow = ({ project, index, onClick, setHoveredColor, previewRef }: ProjectRowProps) => {
+const ProjectRow = ({ project, index, onClick, setHoveredProject, previewRef }: ProjectRowProps) => {
 	const rowRef = useRef(null);
 	const marqueeRef = useRef<HTMLDivElement>(null);
 	const [isHovered, setIsHovered] = useState(false);
@@ -254,12 +246,12 @@ const ProjectRow = ({ project, index, onClick, setHoveredColor, previewRef }: Pr
 			onClick={onClick}
 			onMouseEnter={() => {
 				setIsHovered(true);
-				setHoveredColor(project.color);
+				setHoveredProject(project);
 				if (previewRef.current) gsap.to(previewRef.current, { scale: 1, autoAlpha: 1, duration: 0.2 });
 			}}
 			onMouseLeave={() => {
 				setIsHovered(false);
-				setHoveredColor(null);
+				setHoveredProject(null);
 				if (previewRef.current) gsap.to(previewRef.current, { scale: 0, autoAlpha: 0, duration: 0.2 });
 			}}
 			className="archive-row opacity-0 group relative w-full border-b-4 border-neo-black bg-neo-white hover:bg-neo-black hover:text-neo-lime transition-colors duration-300 cursor-pointer overflow-hidden h-24 md:h-32 flex items-center px-4 md:px-8"
@@ -318,7 +310,7 @@ export default function ArchiveTable() {
 	const previewRef = useRef<HTMLDivElement>(null);
 	const [filter, setFilter] = useState('ALL');
 	const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-	const [hoveredColor, setHoveredColor] = useState<string | null>(null);
+	const [hoveredProject, setHoveredProject] = useState<Project | null>(null);
 
 	const filteredProjects = filter === 'ALL' ? allProjects : allProjects.filter((p) => p.category === filter);
 
@@ -393,7 +385,7 @@ export default function ArchiveTable() {
 							index={i}
 							project={project}
 							onClick={() => setSelectedProject(project)}
-							setHoveredColor={setHoveredColor}
+							setHoveredProject={setHoveredProject}
 							previewRef={previewRef}
 						/>
 					))}
@@ -402,14 +394,17 @@ export default function ArchiveTable() {
 				{!selectedProject && (
 					<div
 						ref={previewRef}
-						className="fixed top-0 left-0 z-50 pointer-events-none w-64 h-40 border-4 border-neo-black bg-neo-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center invisible origin-center"
+						className="fixed top-0 left-0 z-50 pointer-events-none w-64 h-40 border-4 border-neo-black bg-neo-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] invisible origin-center overflow-hidden"
 					>
-						<div
-							className="w-full h-full flex flex-col items-center justify-center font-bold text-center p-2 text-neo-black border-2 border-white"
-							style={{ backgroundColor: hoveredColor || '#fff' }}
-						>
-							<span className="text-5xl mb-2">✦</span>
-						</div>
+						{hoveredProject && (
+							<Image
+								src={hoveredProject.image}
+								alt={hoveredProject.title}
+								width={256}
+								height={160}
+								className="w-full h-full object-cover object-top"
+							/>
+						)}
 					</div>
 				)}
 			</div>
