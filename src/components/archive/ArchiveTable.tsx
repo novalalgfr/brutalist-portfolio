@@ -311,6 +311,7 @@ const ProjectRow = ({ project, index, onClick, setHoveredProject, previewRef }: 
 export default function ArchiveTable() {
 	const container = useRef(null);
 	const previewRef = useRef<HTMLDivElement>(null);
+	const isFirstLoad = useRef(true);
 	const [filter, setFilter] = useState('ALL');
 	const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 	const [hoveredProject, setHoveredProject] = useState<Project | null>(null);
@@ -319,22 +320,37 @@ export default function ArchiveTable() {
 
 	useGSAP(
 		() => {
+			const startDelay = isFirstLoad.current ? 1.0 : 0;
+
+			if (isFirstLoad.current) {
+				gsap.set('.filter-container', { y: 50, opacity: 0 });
+
+				gsap.to('.filter-container', {
+					y: 0,
+					opacity: 1,
+					duration: 0.8,
+					delay: startDelay,
+					ease: 'power3.out'
+				});
+			}
+
 			gsap.killTweensOf('.archive-row');
 
 			gsap.fromTo(
 				'.archive-row',
-				{ opacity: 0, y: 20 },
+				{ opacity: 0, y: 50 },
 				{
 					opacity: 1,
 					y: 0,
-					duration: 0.4,
-					stagger: 0.05,
-					ease: 'power2.out',
+					duration: 0.8,
+					stagger: 0.1,
+					ease: 'power3.out',
+					delay: isFirstLoad.current ? startDelay + 0.2 : 0,
 					overwrite: 'auto'
 				}
 			);
 
-			gsap.to('.filter-container', { opacity: 1, duration: 0.3 });
+			isFirstLoad.current = false;
 		},
 		{ scope: container, dependencies: [filter] }
 	);
@@ -364,7 +380,7 @@ export default function ArchiveTable() {
 				className="w-full"
 			>
 				<div className="flex justify-start mb-8 overflow-x-auto pb-2 md:pb-0">
-					<div className="filter-container inline-flex border-4 border-neo-black bg-neo-white shadow-neo">
+					<div className="filter-container opacity-0 inline-flex border-4 border-neo-black bg-neo-white shadow-neo">
 						{categories.map((cat) => (
 							<button
 								key={cat}
@@ -392,6 +408,10 @@ export default function ArchiveTable() {
 							previewRef={previewRef}
 						/>
 					))}
+
+					{filteredProjects.length === 0 && (
+						<div className="archive-row p-8 text-center font-mono opacity-0">NO ENTRIES FOUND.</div>
+					)}
 				</div>
 
 				{!selectedProject && (
