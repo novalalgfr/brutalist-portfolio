@@ -54,7 +54,6 @@ export default function ArchivePage() {
 				</div>
 
 				<div className="archive-header opacity-0">
-					{' '}
 					<div className="flex items-center gap-4 mb-2">
 						<span className="bg-neo-black text-neo-white border-2 border-neo-black px-3 py-1 font-bold font-mono text-xs">
 							📂 DATABASE

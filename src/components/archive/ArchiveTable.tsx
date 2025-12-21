@@ -1,9 +1,10 @@
 'use client';
 
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, useCallback, memo } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
 
 interface Project {
 	year: string;
@@ -96,152 +97,58 @@ export const allProjects: Project[] = [
 
 const categories = ['ALL', 'WEBSITE', 'SOFTWARE', 'ML / AI'];
 
-interface ProjectModalProps {
-	project: Project;
-	onClose: () => void;
-}
-
-function ProjectModal({ project, onClose }: ProjectModalProps) {
-	const overlayRef = useRef(null);
-	const contentRef = useRef(null);
-
-	useGSAP(
-		() => {
-			const tl = gsap.timeline();
-			tl.fromTo(overlayRef.current, { opacity: 0 }, { opacity: 1, duration: 0.2, ease: 'power2.out' });
-			tl.fromTo(
-				contentRef.current,
-				{ y: 50, opacity: 0 },
-				{ y: 0, opacity: 1, duration: 0.4, ease: 'power2.out', delay: 0.05 }
-			);
-		},
-		{ scope: overlayRef }
-	);
-
-	const handleClose = () => {
-		const tl = gsap.timeline({ onComplete: onClose });
-		tl.to(contentRef.current, { y: 20, opacity: 0, duration: 0.2 });
-		tl.to(overlayRef.current, { opacity: 0, duration: 0.2 });
-	};
-
-	return (
-		<div
-			ref={overlayRef}
-			className="fixed inset-0 z-[100] overflow-y-auto bg-neo-white/95"
-		>
-			<div className="fixed top-4 right-4 md:top-8 md:right-8 z-[110]">
-				<button
-					onClick={handleClose}
-					className="w-14 h-14 flex items-center justify-center bg-neo-white border-4 border-neo-black hover:bg-neo-black hover:text-neo-lime transition-all shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px]"
-				>
-					<span className="font-mono font-black text-2xl">[X]</span>
-				</button>
-			</div>
-
-			<div className="min-h-screen w-full flex justify-center py-12 px-4 md:py-20">
-				<div
-					ref={contentRef}
-					className="w-full max-w-5xl bg-transparent"
-				>
-					<div className="mb-8 md:mb-12 text-center md:text-left border-b-4 border-neo-black pb-8">
-						<div className="flex flex-wrap gap-3 mb-4 justify-center md:justify-start">
-							<span className="bg-neo-black text-neo-lime px-3 py-1 font-mono font-bold text-sm uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)]">
-								{project.category}
-							</span>
-							<span className="border-2 border-neo-black px-3 py-1 font-mono font-bold text-sm uppercase bg-white">
-								{project.year}
-							</span>
-						</div>
-						<h1 className="text-4xl md:text-7xl font-black uppercase tracking-tighter leading-none mb-4 text-neo-black">
-							{project.title}
-						</h1>
-						<p className="font-mono text-sm md:text-base font-bold text-gray-500 uppercase tracking-widest">
-							{project.stack}
-						</p>
-					</div>
-
-					<div className="w-full mb-12 bg-gray-100 border-4 border-neo-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-						<Image
-							src={project.image}
-							alt={project.title}
-							width={1920}
-							height={1080}
-							className="w-full h-auto block"
-							priority
-							quality={85}
-						/>
-					</div>
-
-					<div className="flex flex-col md:flex-row gap-8 md:gap-12">
-						<div className="w-full md:w-2/3">
-							<h3 className="font-black text-2xl uppercase mb-4">Project Overview</h3>
-							<p className="text-lg md:text-xl font-medium leading-relaxed text-gray-800">
-								{project.desc}
-							</p>
-						</div>
-
-						<div className="w-full md:w-1/3">
-							{project.link && (
-								<div className="sticky top-24">
-									<button
-										onClick={() => window.open(project.link, '_blank')}
-										className="w-full py-4 bg-neo-lime text-neo-black font-black uppercase text-xl border-4 border-neo-black hover:bg-neo-black hover:text-neo-lime transition-all shadow-[6px_6px_0px_0px_#000] hover:shadow-none hover:translate-x-1 hover:translate-y-1"
-									>
-										Visit Website
-									</button>
-								</div>
-							)}
-						</div>
-					</div>
-
-					<div className="h-24"></div>
-				</div>
-			</div>
-		</div>
-	);
-}
+const ProjectModal = dynamic(() => import('./ProjectModal'), {
+	ssr: false,
+	loading: () => null
+});
 
 interface KineticRowProps {
 	project: Project;
 	index: number;
 	onClick: () => void;
-	setHoveredProject: (project: Project | null) => void;
+	onHoverChange: (project: Project | null) => void;
 	previewRef: React.RefObject<HTMLDivElement | null>;
 }
 
-const KineticRow = ({ project, index, onClick, setHoveredProject, previewRef }: KineticRowProps) => {
-	const rowRef = useRef(null);
+const KineticRow = memo(({ project, index, onClick, onHoverChange, previewRef }: KineticRowProps) => {
 	const isIndented = index % 3 === 1;
+
+	const handleMouseEnter = useCallback(() => {
+		onHoverChange(project);
+		if (previewRef.current) {
+			gsap.to(previewRef.current, {
+				scale: 1,
+				autoAlpha: 1,
+				rotate: 3,
+				duration: 0.3,
+				ease: 'back.out(1.7)',
+				overwrite: 'auto'
+			});
+		}
+	}, [project, onHoverChange, previewRef]);
+
+	const handleMouseLeave = useCallback(() => {
+		onHoverChange(null);
+		if (previewRef.current) {
+			gsap.to(previewRef.current, {
+				scale: 0,
+				autoAlpha: 0,
+				rotate: 0,
+				duration: 0.2,
+				overwrite: 'auto'
+			});
+		}
+	}, [onHoverChange, previewRef]);
 
 	return (
 		<div
-			ref={rowRef}
 			onClick={onClick}
-			onMouseEnter={() => {
-				setHoveredProject(project);
-				if (previewRef.current)
-					gsap.to(previewRef.current, {
-						scale: 1,
-						autoAlpha: 1,
-						rotate: 3,
-						duration: 0.3,
-						ease: 'back.out(1.7)'
-					});
-			}}
-			onMouseLeave={() => {
-				setHoveredProject(null);
-				if (previewRef.current)
-					gsap.to(previewRef.current, {
-						scale: 0,
-						autoAlpha: 0,
-						rotate: 0,
-						duration: 0.2
-					});
-			}}
-			className={`group relative w-full py-6 border-b-4 border-neo-black cursor-pointer transition-all duration-200 
+			onMouseEnter={handleMouseEnter}
+			onMouseLeave={handleMouseLeave}
+			className={`group relative w-full py-6 border-b-4 border-neo-black cursor-pointer transition-colors duration-200 
             hover:bg-neo-black hover:text-neo-lime ${isIndented ? 'md:pl-24' : 'md:pl-0'}`}
 		>
-			<div className="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-8 px-4 z-10 relative">
+			<div className="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-8 px-4 z-10 relative will-change-transform">
 				<span className="font-mono text-neo-black/50 group-hover:text-neo-lime/70 text-lg font-bold">
 					{(index + 1).toString().padStart(2, '0')}
 				</span>
@@ -259,11 +166,16 @@ const KineticRow = ({ project, index, onClick, setHoveredProject, previewRef }: 
 			</div>
 		</div>
 	);
-};
+});
+
+KineticRow.displayName = 'KineticRow';
 
 export default function ArchiveTable() {
 	const container = useRef(null);
 	const previewRef = useRef<HTMLDivElement>(null);
+
+	const xTo = useRef<gsap.QuickToFunc | null>(null);
+	const yTo = useRef<gsap.QuickToFunc | null>(null);
 
 	const [filter, setFilter] = useState('ALL');
 	const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -273,10 +185,11 @@ export default function ArchiveTable() {
 
 	useGSAP(
 		() => {
+			xTo.current = gsap.quickTo(previewRef.current, 'x', { duration: 0.3, ease: 'power3.out' });
+			yTo.current = gsap.quickTo(previewRef.current, 'y', { duration: 0.3, ease: 'power3.out' });
+
 			const tl = gsap.timeline();
 
-			// FIXED: Added clearProps: 'all' to ensure GSAP removes inline styles after animation
-			// This prevents conflict with Flexbox gap and Tailwind hover effects
 			tl.from('.filter-btn', {
 				x: -50,
 				opacity: 0,
@@ -317,27 +230,27 @@ export default function ArchiveTable() {
 	useEffect(() => {
 		const movePreview = (e: MouseEvent) => {
 			if (!previewRef.current || selectedProject) return;
-			gsap.to(previewRef.current, {
-				x: e.clientX + 20,
-				y: e.clientY + 20,
-				duration: 0.3,
-				ease: 'power3.out'
-			});
+			if (xTo.current && yTo.current) {
+				xTo.current(e.clientX + 20);
+				yTo.current(e.clientY + 20);
+			}
 		};
+
 		window.addEventListener('mousemove', movePreview);
 		return () => window.removeEventListener('mousemove', movePreview);
 	}, [selectedProject]);
 
 	useEffect(() => {
-		if (selectedProject) {
-			document.body.style.overflow = 'hidden';
-		} else {
-			document.body.style.overflow = 'auto';
-		}
+		if (selectedProject) document.body.style.overflow = 'hidden';
+		else document.body.style.overflow = 'auto';
 		return () => {
 			document.body.style.overflow = 'auto';
 		};
 	}, [selectedProject]);
+
+	const handleHoverChange = useCallback((project: Project | null) => {
+		setHoveredProject(project);
+	}, []);
 
 	return (
 		<div className="w-full max-w-[1920px] mx-auto">
@@ -365,14 +278,14 @@ export default function ArchiveTable() {
 				<div className="flex flex-col w-full border-t-4 border-neo-black divider-line origin-left">
 					{filteredProjects.map((project, i) => (
 						<div
-							key={i}
+							key={`${project.title}-${i}`}
 							className="kinetic-row"
 						>
 							<KineticRow
 								project={project}
 								index={i}
 								onClick={() => setSelectedProject(project)}
-								setHoveredProject={setHoveredProject}
+								onHoverChange={handleHoverChange}
 								previewRef={previewRef}
 							/>
 						</div>
@@ -388,14 +301,15 @@ export default function ArchiveTable() {
 
 			<div
 				ref={previewRef}
-				className="fixed top-0 left-0 z-50 pointer-events-none w-72 h-48 bg-neo-white border-4 border-neo-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] invisible origin-center p-1"
+				className="fixed top-0 left-0 z-50 pointer-events-none w-72 h-48 bg-neo-white border-4 border-neo-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] invisible origin-center p-1 will-change-transform"
 			>
 				{hoveredProject && (
-					<div className="relative w-full h-full border-2 border-neo-black">
+					<div className="relative w-full h-full border-2 border-neo-black bg-gray-200">
 						<Image
 							src={hoveredProject.image}
 							alt="preview"
 							fill
+							sizes="300px"
 							className="object-cover object-top"
 						/>
 					</div>
