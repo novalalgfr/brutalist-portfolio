@@ -273,14 +273,43 @@ export default function ArchiveTable() {
 
 	useGSAP(
 		() => {
-			gsap.from('.kinetic-row', {
-				y: 50,
+			const tl = gsap.timeline();
+
+			// FIXED: Added clearProps: 'all' to ensure GSAP removes inline styles after animation
+			// This prevents conflict with Flexbox gap and Tailwind hover effects
+			tl.from('.filter-btn', {
+				x: -50,
 				opacity: 0,
 				stagger: 0.1,
-				duration: 0.8,
+				duration: 0.6,
 				ease: 'power3.out',
-				delay: 0.2
+				clearProps: 'all'
 			});
+
+			tl.from(
+				'.divider-line',
+				{
+					scaleX: 0,
+					transformOrigin: 'left center',
+					duration: 0.8,
+					ease: 'expo.out',
+					clearProps: 'all'
+				},
+				'-=0.4'
+			);
+
+			tl.from(
+				'.kinetic-row',
+				{
+					x: -100,
+					opacity: 0,
+					stagger: 0.1,
+					duration: 0.8,
+					ease: 'power3.out',
+					clearProps: 'all'
+				},
+				'-=0.6'
+			);
 		},
 		{ scope: container }
 	);
@@ -316,12 +345,12 @@ export default function ArchiveTable() {
 				ref={container}
 				className="relative z-10 w-full"
 			>
-				<div className="flex flex-wrap gap-2 md:gap-4 mb-12 items-center">
+				<div className="flex flex-wrap gap-2 md:gap-4 mb-12 items-center p-1">
 					{categories.map((cat) => (
 						<button
 							key={cat}
 							onClick={() => setFilter(cat)}
-							className={`px-8 py-3 md:py-4 font-black text-sm md:text-base uppercase border-4 border-neo-black transition-all duration-200
+							className={`filter-btn px-8 py-3 md:py-4 font-black text-sm md:text-base uppercase border-4 border-neo-black transition-all duration-200
                             ${
 								filter === cat
 									? 'bg-neo-black text-neo-lime'
@@ -333,7 +362,7 @@ export default function ArchiveTable() {
 					))}
 				</div>
 
-				<div className="flex flex-col w-full border-t-4 border-neo-black">
+				<div className="flex flex-col w-full border-t-4 border-neo-black divider-line origin-left">
 					{filteredProjects.map((project, i) => (
 						<div
 							key={i}
