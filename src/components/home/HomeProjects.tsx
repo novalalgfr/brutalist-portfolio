@@ -5,39 +5,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-
-const projects = [
-	{
-		id: '01',
-		title: 'E-COMMERCE',
-		category: 'WEB APPLICATION',
-		year: '2025',
-		img: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1000&auto=format&fit=crop'
-	},
-	{
-		id: '02',
-		title: 'BATIK AI',
-		category: 'MACHINE LEARNING',
-		year: '2025',
-		img: 'https://images.unsplash.com/photo-1515630278258-407f66498911?q=80&w=1000&auto=format&fit=crop'
-	},
-	{
-		id: '03',
-		title: 'SINAR PLASTIK',
-		category: 'POS SYSTEM',
-		year: '2024',
-		img: 'https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?q=80&w=1000&auto=format&fit=crop'
-	},
-	{
-		id: '04',
-		title: 'TASKFLOW',
-		category: 'JAVA DESKTOP',
-		year: '2024',
-		img: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=1000&auto=format&fit=crop'
-	}
-];
+import { allProjects } from '../archive/ArchiveTable';
 
 export default function HomeProjects() {
+	const projects = allProjects.slice(0, 3);
 	const [activeProject, setActiveProject] = useState(0);
 	const container = useRef(null);
 
@@ -122,7 +93,7 @@ export default function HomeProjects() {
 							<div className="w-3 h-3 rounded-full bg-green-500 border border-black" />
 						</div>
 						<div className="absolute bottom-4 right-4 z-20 bg-neo-black text-neo-white px-2 py-1 font-mono text-xs border border-neo-white">
-							IMG_PREVIEW: {projects[activeProject].id}
+							IMG_PREVIEW: {(activeProject + 1).toString().padStart(2, '0')}
 						</div>
 
 						<div className="relative w-full h-full overflow-hidden bg-gray-800 border-2 border-gray-700">
@@ -130,10 +101,10 @@ export default function HomeProjects() {
 
 							<Image
 								key={activeProject}
-								src={projects[activeProject].img}
+								src={projects[activeProject].image}
 								alt={projects[activeProject].title}
 								fill
-								className="project-img object-cover filter grayscale hover:grayscale-0 transition-all duration-500"
+								className="project-img object-cover object-top filter transition-all duration-500"
 							/>
 						</div>
 					</div>

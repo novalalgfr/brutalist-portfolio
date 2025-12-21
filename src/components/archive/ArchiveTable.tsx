@@ -15,7 +15,7 @@ interface Project {
 	link?: string;
 }
 
-const allProjects: Project[] = [
+export const allProjects: Project[] = [
 	{
 		year: '2025',
 		title: 'Portal SPMB Kota Bogor 2026',
@@ -38,7 +38,8 @@ const allProjects: Project[] = [
 		category: 'WEBSITE',
 		stack: 'Next.js',
 		desc: 'Led a team as Product Manager in developing an integrated e-commerce website with Point of Sale (POS) system, managing product roadmap, coordinating between developer and designer teams, and ensuring timely delivery of key features including inventory management, payment gateway, and real-time sales tracking aligned with business requirements.',
-		image: '/archive/sinar-plastik.jpg'
+		image: '/archive/sinar-plastik.jpg',
+		link: 'https://toko-sinar-plastik.vercel.app/'
 	},
 	{
 		year: '2025',
@@ -46,7 +47,8 @@ const allProjects: Project[] = [
 		category: 'ML / AI',
 		stack: 'EfficienNet, TensorFlow, Python',
 		desc: 'Developed a machine learning-based authentication and classification system for Yogyakarta batik using EfficientNetB0 architecture for image classification, with full-stack implementation including responsive Next.js frontend and Flask backend as REST API, achieving high accuracy in identifying and classifying various traditional Yogyakarta batik patterns.',
-		image: '/archive/batik-yogya.jpg'
+		image: '/archive/batik-yogya.jpg',
+		link: 'https://batik-yogya.my.id/'
 	},
 	{
 		year: '2025',
@@ -78,7 +80,8 @@ const allProjects: Project[] = [
 		category: 'WEBSITE',
 		stack: 'React.js',
 		desc: 'Developed an educator information system for Mimika Regency that provides comprehensive data on all schools across education levels, covering institutional profiles, educator information, facilities, and education statistics to enhance transparency and accessibility of educational information throughout the Mimika region.',
-		image: '/archive/sip-mimika.jpg'
+		image: '/archive/sip-mimika.jpg',
+		link: 'https://dinaspendidikan.mimikakab.go.id/'
 	},
 	{
 		year: '2024',
@@ -87,7 +90,7 @@ const allProjects: Project[] = [
 		stack: 'FIGMA',
 		desc: "Designed the UI/UX interface for PT Mardawa Intiguna Persada's corporate profile website, presenting the company's identity professionally through modern design, intuitive navigation, and optimal user experience to strengthen brand presence on digital platforms.",
 		image: '/archive/mardawa.jpg',
-		link: 'https://spmb.kotabogor.go.id'
+		link: 'https://mardawa.id/'
 	}
 ];
 
