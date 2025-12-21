@@ -134,7 +134,7 @@ function ProjectModal({ project, onClose }: ProjectModalProps) {
 				className="relative z-10 w-full h-[90vh] md:h-[95vh] md:w-[90vw] bg-neo-bg border-t-4 md:border-4 border-neo-black shadow-2xl overflow-hidden flex flex-col"
 			>
 				<div className="flex justify-between items-center p-4 md:p-6 border-b-4 border-neo-black bg-neo-white shrink-0">
-					<h2 className="text-xl md:text-3xl font-black uppercase italic tracking-tighter truncate pr-4">
+					<h2 className="text-xl md:text-3xl font-black uppercase italic tracking-tighter pr-4">
 						{project.title}
 					</h2>
 					<button
