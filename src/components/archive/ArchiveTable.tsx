@@ -102,109 +102,106 @@ interface ProjectModalProps {
 }
 
 function ProjectModal({ project, onClose }: ProjectModalProps) {
-	const modalRef = useRef(null);
+	const overlayRef = useRef(null);
 	const contentRef = useRef(null);
 
 	useGSAP(
 		() => {
 			const tl = gsap.timeline();
-			tl.fromTo(modalRef.current, { opacity: 0 }, { opacity: 1, duration: 0.2 });
-			tl.fromTo(contentRef.current, { y: '100%' }, { y: '0%', duration: 0.5, ease: 'power4.inOut' });
+			tl.fromTo(overlayRef.current, { opacity: 0 }, { opacity: 1, duration: 0.2, ease: 'power2.out' });
+			tl.fromTo(
+				contentRef.current,
+				{ y: 50, opacity: 0 },
+				{ y: 0, opacity: 1, duration: 0.4, ease: 'power2.out', delay: 0.05 }
+			);
 		},
-		{ scope: modalRef }
+		{ scope: overlayRef }
 	);
 
 	const handleClose = () => {
 		const tl = gsap.timeline({ onComplete: onClose });
-		tl.to(contentRef.current, { y: '100%', duration: 0.4, ease: 'power4.in' });
-		tl.to(modalRef.current, { opacity: 0, duration: 0.2 }, '-=0.2');
+		tl.to(contentRef.current, { y: 20, opacity: 0, duration: 0.2 });
+		tl.to(overlayRef.current, { opacity: 0, duration: 0.2 });
 	};
 
 	return (
 		<div
-			ref={modalRef}
-			className="fixed inset-0 z-[100] flex items-end justify-center md:items-center"
+			ref={overlayRef}
+			className="fixed inset-0 z-[100] overflow-y-auto bg-neo-white/95"
 		>
-			<div
-				onClick={handleClose}
-				className="absolute inset-0 bg-neo-black/95 cursor-pointer"
-			/>
-			<div
-				ref={contentRef}
-				className="relative z-10 w-full h-[90vh] md:h-[95vh] md:w-[90vw] bg-neo-bg border-t-4 md:border-4 border-neo-black shadow-2xl overflow-hidden flex flex-col"
-			>
-				<div className="flex justify-between items-center p-4 md:p-6 border-b-4 border-neo-black bg-neo-white shrink-0">
-					<h2 className="text-xl md:text-3xl font-black uppercase italic tracking-tighter pr-4">
-						{project.title}
-					</h2>
-					<button
-						onClick={handleClose}
-						className="px-4 py-2 bg-neo-black text-neo-white font-bold hover:bg-neo-lime hover:text-neo-black border-2 border-transparent hover:border-neo-black transition-colors"
-					>
-						CLOSE [X]
-					</button>
-				</div>
+			<div className="fixed top-4 right-4 md:top-8 md:right-8 z-[110]">
+				<button
+					onClick={handleClose}
+					className="w-14 h-14 flex items-center justify-center bg-neo-white border-4 border-neo-black hover:bg-neo-black hover:text-neo-lime transition-all shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px]"
+				>
+					<span className="font-mono font-black text-2xl">[X]</span>
+				</button>
+			</div>
 
-				<div className="flex-1 flex flex-col md:flex-row min-h-0 overflow-hidden">
-					<div className="w-full md:w-3/4 h-full bg-gray-100 border-b-4 md:border-b-0 md:border-r-4 border-neo-black overflow-y-auto overflow-x-hidden">
-						<div className="w-full min-h-full flex items-start justify-center p-4 md:p-8">
-							<div className="w-full max-w-6xl relative">
-								<Image
-									src={project.image}
-									alt={project.title}
-									width={1920}
-									height={1080}
-									priority
-									sizes="(max-width: 768px) 100vw, 75vw"
-									className="w-full h-auto object-contain border-4 border-neo-black shadow-lg"
-								/>
-							</div>
+			<div className="min-h-screen w-full flex justify-center py-12 px-4 md:py-20">
+				<div
+					ref={contentRef}
+					className="w-full max-w-5xl bg-transparent"
+				>
+					<div className="mb-8 md:mb-12 text-center md:text-left border-b-4 border-neo-black pb-8">
+						<div className="flex flex-wrap gap-3 mb-4 justify-center md:justify-start">
+							<span className="bg-neo-black text-neo-lime px-3 py-1 font-mono font-bold text-sm uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)]">
+								{project.category}
+							</span>
+							<span className="border-2 border-neo-black px-3 py-1 font-mono font-bold text-sm uppercase bg-white">
+								{project.year}
+							</span>
 						</div>
+						<h1 className="text-4xl md:text-7xl font-black uppercase tracking-tighter leading-none mb-4 text-neo-black">
+							{project.title}
+						</h1>
+						<p className="font-mono text-sm md:text-base font-bold text-gray-500 uppercase tracking-widest">
+							{project.stack}
+						</p>
 					</div>
 
-					<div className="w-full md:w-1/4 h-full bg-neo-white overflow-y-auto flex flex-col">
-						<div className="p-6 md:p-8 space-y-8">
-							<div>
-								<h3 className="font-bold text-sm text-gray-500 mb-1">TYPE</h3>
-								<p className="font-black text-xl uppercase">{project.category}</p>
-							</div>
-							<div>
-								<h3 className="font-bold text-sm text-gray-500 mb-1">STACK</h3>
-								<div className="flex flex-wrap gap-2">
-									{project.stack.split(', ').map((t) => (
-										<span
-											key={t}
-											className="px-2 py-1 border border-neo-black bg-neo-lime text-xs font-bold"
-										>
-											{t}
-										</span>
-									))}
+					<div className="w-full mb-12 bg-gray-100 border-4 border-neo-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+						<Image
+							src={project.image}
+							alt={project.title}
+							width={1920}
+							height={1080}
+							className="w-full h-auto block"
+							priority
+							quality={85}
+						/>
+					</div>
+
+					<div className="flex flex-col md:flex-row gap-8 md:gap-12">
+						<div className="w-full md:w-2/3">
+							<h3 className="font-black text-2xl uppercase mb-4">Project Overview</h3>
+							<p className="text-lg md:text-xl font-medium leading-relaxed text-gray-800">
+								{project.desc}
+							</p>
+						</div>
+
+						<div className="w-full md:w-1/3">
+							{project.link && (
+								<div className="sticky top-24">
+									<button
+										onClick={() => window.open(project.link, '_blank')}
+										className="w-full py-4 bg-neo-lime text-neo-black font-black uppercase text-xl border-4 border-neo-black hover:bg-neo-black hover:text-neo-lime transition-all shadow-[6px_6px_0px_0px_#000] hover:shadow-none hover:translate-x-1 hover:translate-y-1"
+									>
+										Visit Website
+									</button>
 								</div>
-							</div>
-							<div>
-								<h3 className="font-bold text-sm text-gray-500 mb-1">DESC</h3>
-								<p className="text-sm opacity-80 font-medium">{project.desc}</p>
-							</div>
+							)}
 						</div>
-
-						{project.link && (
-							<div className="mt-auto p-6 md:p-8 pt-4 border-t-2 border-neo-black bg-neo-white sticky bottom-0">
-								<button
-									className="w-full py-4 bg-neo-white text-neo-black font-bold border-2 hover:bg-neo-lime hover:text-neo-black transition-colors shadow-neo hover:shadow-none hover:translate-x-1 hover:translate-y-1"
-									onClick={() => window.open(project.link, '_blank')}
-								>
-									VISIT SITE
-								</button>
-							</div>
-						)}
 					</div>
+
+					<div className="h-24"></div>
 				</div>
 			</div>
 		</div>
 	);
 }
 
-interface ProjectRowProps {
+interface KineticRowProps {
 	project: Project;
 	index: number;
 	onClick: () => void;
@@ -212,97 +209,53 @@ interface ProjectRowProps {
 	previewRef: React.RefObject<HTMLDivElement | null>;
 }
 
-const ProjectRow = ({ project, index, onClick, setHoveredProject, previewRef }: ProjectRowProps) => {
+const KineticRow = ({ project, index, onClick, setHoveredProject, previewRef }: KineticRowProps) => {
 	const rowRef = useRef(null);
-	const marqueeRef = useRef<HTMLDivElement>(null);
-	const [isHovered, setIsHovered] = useState(false);
-
-	useGSAP(
-		() => {
-			if (!marqueeRef.current) return;
-
-			const width = marqueeRef.current.offsetWidth;
-			const pixelsPerSecond = 100;
-			const duration = width / 2 / pixelsPerSecond;
-
-			const tl = gsap.to(marqueeRef.current, {
-				xPercent: -50,
-				repeat: -1,
-				duration,
-				ease: 'linear',
-				paused: true
-			});
-
-			if (isHovered) {
-				tl.play();
-			} else {
-				tl.pause();
-				gsap.to(marqueeRef.current, { xPercent: 0, duration: 0.5 });
-			}
-		},
-		{ scope: rowRef, dependencies: [isHovered] }
-	);
+	const isIndented = index % 3 === 1;
 
 	return (
 		<div
 			ref={rowRef}
 			onClick={onClick}
 			onMouseEnter={() => {
-				setIsHovered(true);
 				setHoveredProject(project);
-				if (previewRef.current) gsap.to(previewRef.current, { scale: 1, autoAlpha: 1, duration: 0.2 });
+				if (previewRef.current)
+					gsap.to(previewRef.current, {
+						scale: 1,
+						autoAlpha: 1,
+						rotate: 3,
+						duration: 0.3,
+						ease: 'back.out(1.7)'
+					});
 			}}
 			onMouseLeave={() => {
-				setIsHovered(false);
 				setHoveredProject(null);
-				if (previewRef.current) gsap.to(previewRef.current, { scale: 0, autoAlpha: 0, duration: 0.2 });
+				if (previewRef.current)
+					gsap.to(previewRef.current, {
+						scale: 0,
+						autoAlpha: 0,
+						rotate: 0,
+						duration: 0.2
+					});
 			}}
-			className="archive-row opacity-0 group relative w-full border-b-4 border-neo-black bg-neo-white hover:bg-neo-black hover:text-neo-lime transition-colors duration-300 cursor-pointer overflow-hidden h-24 md:h-32 flex items-center px-4 md:px-8"
+			className={`group relative w-full py-6 border-b-4 border-neo-black cursor-pointer transition-all duration-200 
+            hover:bg-neo-black hover:text-neo-lime ${isIndented ? 'md:pl-24' : 'md:pl-0'}`}
 		>
-			<div
-				className={`flex w-full items-center justify-between pr-12 md:pr-16 transition-opacity duration-300 ${
-					isHovered ? 'opacity-0' : 'opacity-100'
-				}`}
-			>
-				<div className="flex items-center gap-6 md:gap-10 overflow-hidden">
-					<span className="font-mono text-xl opacity-50 flex-shrink-0">
-						{(index + 1).toString().padStart(2, '0')}
+			<div className="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-8 px-4 z-10 relative">
+				<span className="font-mono text-neo-black/50 group-hover:text-neo-lime/70 text-lg font-bold">
+					{(index + 1).toString().padStart(2, '0')}
+				</span>
+				<h3 className="text-3xl md:text-6xl font-black uppercase tracking-tighter text-neo-black group-hover:text-neo-lime transition-all duration-300 group-hover:translate-x-4 group-hover:-skew-x-12">
+					{project.title}
+				</h3>
+				<div className="hidden md:flex ml-auto gap-4 font-mono text-xs font-bold text-neo-black group-hover:text-neo-lime uppercase tracking-wider items-center">
+					<span className="border-2 border-neo-black group-hover:border-neo-lime px-2 py-1">
+						{project.year}
 					</span>
-					<h3 className="text-2xl md:text-4xl font-black uppercase tracking-tighter truncate">
-						{project.title}
-					</h3>
+					<span className="w-max bg-neo-black text-neo-white group-hover:bg-neo-lime group-hover:text-neo-black px-2 py-1">
+						/{project.category}
+					</span>
 				</div>
-				<div className="hidden md:flex items-center gap-10 flex-shrink-0">
-					<span className="font-mono text-sm border-2 border-neo-black px-2 py-1">{project.category}</span>
-				</div>
-			</div>
-
-			<div
-				className={`absolute inset-0 flex items-center overflow-hidden pointer-events-none opacity-0 ${
-					isHovered ? 'opacity-100' : ''
-				} z-10`}
-			>
-				<div
-					ref={marqueeRef}
-					className="flex whitespace-nowrap"
-				>
-					{[...Array(10)].map((_, i) => (
-						<span
-							key={i}
-							className="text-4xl md:text-6xl font-black uppercase tracking-tighter px-4 italic text-neo-lime"
-						>
-							{project.title} <span className="text-stroke-white text-transparent mx-2">—</span>
-						</span>
-					))}
-				</div>
-			</div>
-
-			<div
-				className={`absolute right-4 md:right-8 z-20 transition-transform duration-300 ${
-					isHovered ? 'hidden' : 'text-neo-black'
-				}`}
-			>
-				↗
 			</div>
 		</div>
 	);
@@ -311,7 +264,7 @@ const ProjectRow = ({ project, index, onClick, setHoveredProject, previewRef }: 
 export default function ArchiveTable() {
 	const container = useRef(null);
 	const previewRef = useRef<HTMLDivElement>(null);
-	const isFirstLoad = useRef(true);
+
 	const [filter, setFilter] = useState('ALL');
 	const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 	const [hoveredProject, setHoveredProject] = useState<Project | null>(null);
@@ -320,39 +273,16 @@ export default function ArchiveTable() {
 
 	useGSAP(
 		() => {
-			const startDelay = isFirstLoad.current ? 1.0 : 0;
-
-			if (isFirstLoad.current) {
-				gsap.set('.filter-container', { y: 50, opacity: 0 });
-
-				gsap.to('.filter-container', {
-					y: 0,
-					opacity: 1,
-					duration: 0.8,
-					delay: startDelay,
-					ease: 'power3.out'
-				});
-			}
-
-			gsap.killTweensOf('.archive-row');
-
-			gsap.fromTo(
-				'.archive-row',
-				{ opacity: 0, y: 50 },
-				{
-					opacity: 1,
-					y: 0,
-					duration: 0.8,
-					stagger: 0.1,
-					ease: 'power3.out',
-					delay: isFirstLoad.current ? startDelay + 0.2 : 0,
-					overwrite: 'auto'
-				}
-			);
-
-			isFirstLoad.current = false;
+			gsap.from('.kinetic-row', {
+				y: 50,
+				opacity: 0,
+				stagger: 0.1,
+				duration: 0.8,
+				ease: 'power3.out',
+				delay: 0.2
+			});
 		},
-		{ scope: container, dependencies: [filter] }
+		{ scope: container }
 	);
 
 	useEffect(() => {
@@ -370,64 +300,75 @@ export default function ArchiveTable() {
 	}, [selectedProject]);
 
 	useEffect(() => {
-		document.body.style.overflow = selectedProject ? 'hidden' : 'auto';
+		if (selectedProject) {
+			document.body.style.overflow = 'hidden';
+		} else {
+			document.body.style.overflow = 'auto';
+		}
+		return () => {
+			document.body.style.overflow = 'auto';
+		};
 	}, [selectedProject]);
 
 	return (
-		<>
+		<div className="w-full max-w-[1920px] mx-auto">
 			<div
 				ref={container}
-				className="w-full"
+				className="relative z-10 w-full"
 			>
-				<div className="flex justify-start mb-8 overflow-x-auto pb-2 md:pb-0">
-					<div className="filter-container opacity-0 inline-flex border-4 border-neo-black bg-neo-white shadow-neo">
-						{categories.map((cat) => (
-							<button
-								key={cat}
-								onClick={() => setFilter(cat)}
-								className={`px-6 py-3 font-bold font-mono text-sm uppercase transition-all whitespace-nowrap border-r-4 border-neo-black last:border-r-0 ${
-									filter === cat
-										? 'bg-neo-black text-neo-lime'
-										: 'bg-neo-white text-neo-black hover:bg-neo-lime'
-								}`}
-							>
-								{cat}
-							</button>
-						))}
-					</div>
+				<div className="flex flex-wrap gap-2 md:gap-4 mb-12 items-center">
+					{categories.map((cat) => (
+						<button
+							key={cat}
+							onClick={() => setFilter(cat)}
+							className={`px-8 py-3 md:py-4 font-black text-sm md:text-base uppercase border-4 border-neo-black transition-all duration-200
+                            ${
+								filter === cat
+									? 'bg-neo-black text-neo-lime'
+									: 'bg-neo-white text-neo-black hover:bg-neo-lime hover:shadow-[6px_6px_0px_0px_#000] hover:-translate-y-1'
+							}`}
+						>
+							{cat}
+						</button>
+					))}
 				</div>
 
-				<div className="border-t-4 border-neo-black">
+				<div className="flex flex-col w-full border-t-4 border-neo-black">
 					{filteredProjects.map((project, i) => (
-						<ProjectRow
+						<div
 							key={i}
-							index={i}
-							project={project}
-							onClick={() => setSelectedProject(project)}
-							setHoveredProject={setHoveredProject}
-							previewRef={previewRef}
-						/>
+							className="kinetic-row"
+						>
+							<KineticRow
+								project={project}
+								index={i}
+								onClick={() => setSelectedProject(project)}
+								setHoveredProject={setHoveredProject}
+								previewRef={previewRef}
+							/>
+						</div>
 					))}
 
 					{filteredProjects.length === 0 && (
-						<div className="archive-row p-8 text-center font-mono opacity-0">NO ENTRIES FOUND.</div>
+						<div className="py-20 text-center font-mono text-gray-500 font-bold text-xl uppercase">
+							NO_DATA_FOUND
+						</div>
 					)}
 				</div>
+			</div>
 
-				{!selectedProject && (
-					<div
-						ref={previewRef}
-						className="fixed top-0 left-0 z-50 pointer-events-none w-64 h-40 border-4 border-neo-black bg-neo-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] invisible origin-center overflow-hidden"
-					>
-						{hoveredProject && (
-							<Image
-								src={hoveredProject.image}
-								alt={hoveredProject.title}
-								width={256}
-								height={160}
-								className="w-full h-full object-cover object-top"
-							/>
-						)}
+			<div
+				ref={previewRef}
+				className="fixed top-0 left-0 z-50 pointer-events-none w-72 h-48 bg-neo-white border-4 border-neo-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] invisible origin-center p-1"
+			>
+				{hoveredProject && (
+					<div className="relative w-full h-full border-2 border-neo-black">
+						<Image
+							src={hoveredProject.image}
+							alt="preview"
+							fill
+							className="object-cover object-top"
+						/>
 					</div>
 				)}
 			</div>
@@ -438,6 +379,6 @@ export default function ArchiveTable() {
 					onClose={() => setSelectedProject(null)}
 				/>
 			)}
-		</>
+		</div>
 	);
 }
