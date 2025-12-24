@@ -113,13 +113,17 @@ interface KineticRowProps {
 const KineticRow = memo(({ project, index, onClick, onHoverChange, previewRef }: KineticRowProps) => {
 	const isIndented = index % 3 === 1;
 
+	const speedFactor = 1.0;
+
+	const calculatedDuration = Math.max(project.title.length * speedFactor, 5);
+
 	const handleMouseEnter = useCallback(() => {
 		onHoverChange(project);
 		if (previewRef.current) {
 			gsap.to(previewRef.current, {
 				scale: 1,
 				autoAlpha: 1,
-				rotate: 3,
+				// rotate: 3,
 				duration: 0.3,
 				ease: 'back.out(1.7)',
 				overwrite: 'auto'
@@ -140,31 +144,72 @@ const KineticRow = memo(({ project, index, onClick, onHoverChange, previewRef }:
 		}
 	}, [onHoverChange, previewRef]);
 
+	const marqueeContent = Array(8).fill(project.title);
+
 	return (
-		<div
-			onClick={onClick}
-			onMouseEnter={handleMouseEnter}
-			onMouseLeave={handleMouseLeave}
-			className={`group relative w-full py-6 border-b-4 border-neo-black cursor-pointer transition-colors duration-200 
-            hover:bg-neo-black hover:text-neo-lime ${isIndented ? 'md:pl-24' : 'md:pl-0'}`}
-		>
-			<div className="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-8 px-4 z-10 relative will-change-transform">
-				<span className="font-mono text-neo-black/50 group-hover:text-neo-lime/70 text-lg font-bold">
-					{(index + 1).toString().padStart(2, '0')}
-				</span>
-				<h3 className="text-3xl md:text-6xl font-black uppercase tracking-tighter text-neo-black group-hover:text-neo-lime transition-all duration-300 group-hover:translate-x-4 group-hover:-skew-x-12">
-					{project.title}
-				</h3>
-				<div className="hidden md:flex ml-auto gap-4 font-mono text-xs font-bold text-neo-black group-hover:text-neo-lime uppercase tracking-wider items-center">
-					<span className="border-2 border-neo-black group-hover:border-neo-lime px-2 py-1">
-						{project.year}
+		<>
+			<style
+				jsx
+				global
+			>{`
+				@keyframes marquee-scroll {
+					0% {
+						transform: translateX(0);
+					}
+					100% {
+						transform: translateX(-50%);
+					}
+				}
+				/* Hapus class .animate-marquee statis yang lama */
+			`}</style>
+
+			<div
+				onClick={onClick}
+				onMouseEnter={handleMouseEnter}
+				onMouseLeave={handleMouseLeave}
+				className={`group relative w-full py-6 border-b-4 border-neo-black cursor-pointer transition-colors duration-200 
+                hover:bg-neo-black hover:text-neo-lime ${isIndented ? 'md:pl-24' : 'md:pl-0'}`}
+			>
+				<div className="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-8 px-4 z-10 relative will-change-transform overflow-hidden">
+					<span className="font-mono text-neo-black/50 group-hover:text-neo-lime/70 text-lg font-bold shrink-0">
+						{(index + 1).toString().padStart(2, '0')}
 					</span>
-					<span className="w-max bg-neo-black text-neo-white group-hover:bg-neo-lime group-hover:text-neo-black px-2 py-1">
-						/{project.category}
-					</span>
+
+					<div className="relative flex-1 overflow-hidden h-14 md:h-20 flex items-center">
+						<h3 className="text-3xl md:text-6xl font-black uppercase tracking-tighter text-neo-black -skew-x-12 transition-opacity duration-0 group-hover:opacity-0 whitespace-nowrap">
+							{project.title}
+						</h3>
+
+						<div className="absolute inset-0 flex items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+							<div
+								className="flex gap-6 whitespace-nowrap will-change-transform"
+								style={{
+									animation: `marquee-scroll ${calculatedDuration}s linear infinite`
+								}}
+							>
+								{marqueeContent.map((text, i) => (
+									<span
+										key={i}
+										className="text-3xl md:text-6xl font-black uppercase tracking-tighter text-neo-lime -skew-x-12"
+									>
+										{text}
+									</span>
+								))}
+							</div>
+						</div>
+					</div>
+
+					<div className="hidden md:flex ml-auto gap-4 font-mono text-xs font-bold text-neo-black group-hover:text-neo-lime uppercase tracking-wider items-center shrink-0 z-20">
+						<span className="border-2 border-neo-black group-hover:border-neo-lime px-2 py-1">
+							{project.year}
+						</span>
+						<span className="w-max bg-neo-black text-neo-white group-hover:bg-neo-lime group-hover:text-neo-black px-2 py-1">
+							/{project.category}
+						</span>
+					</div>
 				</div>
 			</div>
-		</div>
+		</>
 	);
 });
 
