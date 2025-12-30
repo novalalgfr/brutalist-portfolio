@@ -76,7 +76,7 @@ export default function Navbar() {
 					href="/"
 					className="h-full px-6 flex items-center border-r-4 border-neo-black hover:bg-neo-lime transition-colors group relative"
 				>
-					<div className="w-38 h-6 overflow-hidden relative">
+					<div className="w-26 h-6 overflow-hidden relative">
 						<span className="block text-xl font-black italic tracking-tighter transform transition-transform duration-300 group-hover:-translate-y-full">
 							ITS.NOVAL
 						</span>
