@@ -12,8 +12,11 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-	title: 'Noval Portfolio',
-	description: 'Portfolio & Experiments'
+	title: 'Noval — itsnoval',
+	description: 'Frontend developer merging technical precision with bold aesthetics. Open for freelance work.',
+	icons: {
+		icon: '/icon.png'
+	}
 };
 
 export default function RootLayout({

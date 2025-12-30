@@ -78,7 +78,7 @@ export default function Navbar() {
 				>
 					<div className="w-38 h-6 overflow-hidden relative">
 						<span className="block text-xl font-black italic tracking-tighter transform transition-transform duration-300 group-hover:-translate-y-full">
-							NVL.PORTFOLIO
+							ITS.NOVAL
 						</span>
 						<span className="block text-xl font-black italic tracking-tighter absolute top-full left-0 transform transition-transform duration-300 group-hover:-translate-y-full text-neo-black">
 							GO.HOME
