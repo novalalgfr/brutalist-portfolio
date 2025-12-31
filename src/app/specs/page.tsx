@@ -17,7 +17,8 @@ export const metadata: Metadata = {
 
 	openGraph: {
 		title: 'Noval — System Specs & Profile',
-		description: 'Operational status: ONLINE. View complete technical specifications and battle records.'
+		description: 'Operational status: ONLINE. View complete technical specifications and battle records.',
+		images: ['/og-specs.png']
 	}
 };
 

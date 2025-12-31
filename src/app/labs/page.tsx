@@ -15,7 +15,8 @@ export const metadata: Metadata = {
 	],
 	openGraph: {
 		title: 'Noval — Labs & Experiments',
-		description: 'Copy-paste ready UI experiments and code snippets.'
+		description: 'Experimental UI components and code snippets.',
+		images: ['/og-labs.png']
 	}
 };
 

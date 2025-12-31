@@ -14,7 +14,8 @@ export const metadata: Metadata = {
 	],
 	openGraph: {
 		title: 'Signal — Connect with Noval',
-		description: 'Initiate transmission. Open for freelance opportunities and collaboration.'
+		description: 'Initiate transmission. Open for freelance opportunities and collaboration.',
+		images: ['/og-signal.png']
 	}
 };
 

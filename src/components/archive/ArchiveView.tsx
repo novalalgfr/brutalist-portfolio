@@ -70,7 +70,7 @@ export default function ArchiveView() {
 						</p>
 
 						<div className="font-mono text-xs text-right opacity-60">
-							TOTAL_ENTRIES: 08 <br />
+							TOTAL_ENTRIES: 09 <br />
 							STATUS: PUBLIC_ACCESS
 						</div>
 					</div>

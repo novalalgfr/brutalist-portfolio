@@ -17,7 +17,8 @@ export const metadata: Metadata = {
 
 	openGraph: {
 		title: 'Noval — Project Archive',
-		description: 'Explore my selected works in Web Development and Machine Learning.'
+		description: 'Explore my selected works in Web Development and Machine Learning.',
+		images: ['/og-archive.png']
 	}
 };
 
