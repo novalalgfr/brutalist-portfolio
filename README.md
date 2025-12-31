@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ⚡ NOVAL.PORTFOLIO
 
-## Getting Started
+> A personal portfolio website crafted with **Neo-Brutalism** aesthetic. Built to showcase selected works, experiments, and technical capabilities.
 
-First, run the development server:
+![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![GSAP](https://img.shields.io/badge/GSAP-88CE02?style=for-the-badge&logo=greensock&logoColor=black)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 📂 Overview
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Website ini dirancang dengan fokus pada interaksi mikro, tipografi yang berani, dan performa tinggi. Menggunakan **Next.js 14 (App Router)** sebagai kerangka utama dan **GSAP** untuk menangani animasi kompleks.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠️ Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+* **Framework:** Next.js 16 (App Router)
+* **Language:** TypeScript
+* **Styling:** Tailwind CSS
+* **Animation:** GSAP (GreenSock Animation Platform)
+* **Icons/Assets:** React Icons / Unsplash
 
-## Learn More
+## ✨ Key Features
 
-To learn more about Next.js, take a look at the following resources:
+* **Neo-Brutalism UI:** Desain dengan border tebal, warna kontras (Lime/Black), dan layout yang tegas.
+* **Page Transitions:** Transisi unik antar halaman (Boot Sequence, Grid Reveal, Signal Swipe).
+* **Custom Cursor:** Kursor interaktif dengan efek *inverse* (mix-blend-mode) dan *size scaling*.
+* **Interactive Labs:** Komponen eksperimental yang bisa dicoba langsung.
+* **Optimized Performance:** Penggunaan `will-change`, `transform-gpu`, dan optimasi gambar Next.js.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🚀 Getting Started
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Ikuti langkah ini untuk menjalankan proyek di lokal:
 
-## Deploy on Vercel
+1.  **Clone repository:**
+    ```bash
+    git clone [https://github.com/username-anda/portfolio.git](https://github.com/username-anda/portfolio.git)
+    cd portfolio
+    ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    # atau
+    yarn install
+    ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+3.  **Jalankan development server:**
+    ```bash
+    npm run dev
+    ```
+
+4.  Buka browser dan akses `http://localhost:3000`.
+
+## 📜 License
+
+[MIT](LICENSE) © 2025 Noval.
