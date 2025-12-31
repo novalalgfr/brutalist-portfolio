@@ -1,4 +1,4 @@
-# ⚡ NOVAL.PORTFOLIO
+# NOVAL.PORTFOLIO
 
 > A personal portfolio website crafted with **Neo-Brutalism** aesthetic. Built to showcase selected works, experiments, and technical capabilities.
 
