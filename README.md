@@ -9,7 +9,7 @@
 
 ## 📂 Overview
 
-Website ini dirancang dengan fokus pada interaksi mikro, tipografi yang berani, dan performa tinggi. Menggunakan **Next.js 14 (App Router)** sebagai kerangka utama dan **GSAP** untuk menangani animasi kompleks.
+Website ini dirancang dengan fokus pada interaksi mikro, tipografi yang berani, dan performa tinggi. Menggunakan **Next.js 16 (App Router)** sebagai kerangka utama dan **GSAP** untuk menangani animasi kompleks.
 
 ## 🛠️ Tech Stack
 
