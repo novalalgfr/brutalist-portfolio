@@ -13,7 +13,7 @@ const spaceGrotesk = Space_Grotesk({
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
 	? `https://${process.env.NEXT_PUBLIC_BASE_URL}`
-	: 'http://localhost:3000';
+	: 'https://itsnoval.dev';
 
 export const metadata: Metadata = {
 	metadataBase: new URL(baseUrl),
