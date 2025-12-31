@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Space_Grotesk } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/layout/Navbar';
@@ -11,12 +11,79 @@ const spaceGrotesk = Space_Grotesk({
 	variable: '--font-space-grotesk'
 });
 
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
+	? `https://${process.env.NEXT_PUBLIC_BASE_URL}`
+	: 'http://localhost:3000';
+
 export const metadata: Metadata = {
-	title: 'Noval — itsnoval',
-	description: 'Frontend developer merging technical precision with bold aesthetics. Open for freelance work.',
+	metadataBase: new URL(baseUrl),
+
+	title: {
+		default: 'Noval — Frontend Developer & UI Designer',
+		template: '%s | Noval'
+	},
+
+	description:
+		'Frontend Developer and UI/UX Designer based in Jakarta. Specializing in building scalable web applications with Next.js, React, and modern web technologies.',
+
+	keywords: [
+		'Ahmad Noval Algifari',
+		'Noval Algifari',
+		'Noval Frontend',
+		'Frontend Developer',
+		'UI/UX Designer',
+		'Web Developer Jakarta',
+		'Next.js Developer',
+		'React Expert',
+		'Software Engineer Indonesia',
+		'Freelance Web Developer'
+	],
+
+	authors: [{ name: 'Noval', url: baseUrl }],
+	creator: 'Noval',
+
+	openGraph: {
+		title: 'Noval — Frontend Developer & UI Designer',
+		description: 'Building scalable and interactive web applications.',
+		url: baseUrl,
+		siteName: 'Noval Portfolio',
+		locale: 'en_US',
+		type: 'website',
+		images: [
+			{
+				url: '/og-image.png',
+				width: 1200,
+				height: 630,
+				alt: 'Noval Portfolio Preview'
+			}
+		]
+	},
+
+	twitter: {
+		card: 'summary_large_image',
+		title: 'Noval — Frontend Developer',
+		description: 'Building scalable and interactive web applications.',
+		images: ['/og-image.png']
+	},
+
+	alternates: {
+		canonical: '/'
+	},
+
 	icons: {
 		icon: '/icon.png'
+	},
+
+	robots: {
+		index: true,
+		follow: true
 	}
+};
+
+export const viewport: Viewport = {
+	themeColor: '#ffffff',
+	width: 'device-width',
+	initialScale: 1
 };
 
 export default function RootLayout({

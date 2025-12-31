@@ -8,7 +8,7 @@ import {
 	TiltDemo,
 	ParallaxDemo,
 	MagneticDemo
-} from './LabComponents';
+} from './LabsComponents';
 
 export const experiments = [
 	// --- EASY ---
