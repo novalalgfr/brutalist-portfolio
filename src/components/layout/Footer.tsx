@@ -9,6 +9,8 @@ const socialLinks = [
 ];
 
 export default function Footer() {
+	const currentYear = new Date().getFullYear();
+
 	return (
 		<footer className="bg-neo-black text-neo-white py-20 border-t-4 border-neo-black">
 			<div className="w-full px-4 md:px-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-10">
@@ -22,13 +24,6 @@ export default function Footer() {
 				</div>
 
 				<div className="flex flex-col gap-6 text-right">
-					{/* <a
-						href="mailto:email@anda.com"
-						className="text-2xl md:text-3xl font-bold hover:text-neo-lime hover:underline decoration-4 underline-offset-4 transition-colors"
-					>
-						hello@portfolio.com
-					</a> */}
-
 					<div className="flex gap-4 justify-end flex-wrap">
 						{socialLinks.map((link) => (
 							<Link
@@ -43,7 +38,7 @@ export default function Footer() {
 						))}
 					</div>
 
-					<span className="font-mono text-xs opacity-50 mt-10">© 2025 ALL RIGHTS RESERVED.</span>
+					<span className="font-mono text-xs opacity-50 mt-10">© {currentYear} ALL RIGHTS RESERVED.</span>
 				</div>
 			</div>
 		</footer>
