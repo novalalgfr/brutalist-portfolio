@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { allProjects } from '../archive/ArchiveTable';
+import { allProjects } from '../archive/projects';
 
 export default function HomeProjects() {
 	const projects = allProjects.slice(0, 3);

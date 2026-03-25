@@ -1,12 +1,13 @@
 'use client';
 
 import { useRef, useState, useEffect, useCallback, memo } from 'react';
+import { allProjects } from './projects';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 
-interface Project {
+export interface Project {
 	year: string;
 	title: string;
 	category: string;
@@ -15,85 +16,6 @@ interface Project {
 	image: string;
 	link?: string;
 }
-
-export const allProjects: Project[] = [
-	{
-		year: '2025',
-		title: 'Portal SPMB Kota Bogor 2026',
-		category: 'WEBSITE',
-		stack: 'Laravel Inertia',
-		desc: 'Developed the 2026 SPMB Portal for Bogor City with significant improvements from the previous version, separating SD and SMP level navigation with distinct visual branding using unique color schemes for each level, and implementing card data components as an alternative to table displays to enhance responsiveness and information readability on mobile devices.',
-		image: '/archive/spmb-bogor-2026.jpg'
-	},
-	{
-		year: '2025',
-		title: 'Orbit App',
-		category: 'SOFTWARE',
-		stack: 'Java, Spring, Hibernate, Java Swing, FlatLaf',
-		desc: "Developed a desktop project management application called 'Orbit' as a centralized ticketing system solution to address inefficiencies in manual task management methods, built using Java with MVC architecture implementation, Spring Framework for dependency injection, Hibernate ORM for database management, and Java Swing with FlatLaf for modern interface, enabling real-time task status monitoring, clear work distribution, and enhanced project progress transparency to support more structured and productive team collaboration.",
-		image: '/archive/orbit-app.png'
-	},
-	{
-		year: '2025',
-		title: 'Toko Sinar Plastik',
-		category: 'WEBSITE',
-		stack: 'Next.js',
-		desc: 'Led a team as Product Manager in developing an integrated e-commerce website with Point of Sale (POS) system, managing product roadmap, coordinating between developer and designer teams, and ensuring timely delivery of key features including inventory management, payment gateway, and real-time sales tracking aligned with business requirements.',
-		image: '/archive/sinar-plastik.jpg',
-		link: 'https://toko-sinar-plastik.vercel.app/'
-	},
-	{
-		year: '2025',
-		title: 'Authentication and Classification of Yogyakarta Batik',
-		category: 'ML / AI',
-		stack: 'EfficienNet, TensorFlow, Python',
-		desc: 'Developed a machine learning-based authentication and classification system for Yogyakarta batik using EfficientNetB0 architecture for image classification, with full-stack implementation including responsive Next.js frontend and Flask backend as REST API, achieving high accuracy in identifying and classifying various traditional Yogyakarta batik patterns.',
-		image: '/archive/batik-yogya.jpg',
-		link: 'https://batik-yogya.my.id/'
-	},
-	{
-		year: '2025',
-		title: 'Portal SPMB Kota Bogor 2025',
-		category: 'WEBSITE',
-		stack: 'Next.js',
-		desc: "Developed a comprehensive informational portal for Bogor City's 2025 SPMB program serving elementary and junior high school levels, providing centralized access to registration schedules, administrative requirements, enrollment procedures, result announcements, and complete admission guidelines for parents and prospective students.",
-		image: '/archive/spmb-bogor-2025.jpg'
-	},
-	{
-		year: '2025',
-		title: 'Portal SPMB Kota Cilegon 2025',
-		category: 'WEBSITE',
-		stack: 'Next.js',
-		desc: "Built an integrated information portal for Cilegon City's 2025 SPMB program for elementary and junior high school levels, presenting unified information on registration schedules, document requirements, selection mechanisms, result publications, and comprehensive admission guidelines to assist parents and prospective students.",
-		image: '/archive/spmb-cilegon-2025.jpg'
-	},
-	{
-		year: '2025',
-		title: 'Portal SPMB Kota Palembang 2025',
-		category: 'WEBSITE',
-		stack: 'Next.js',
-		desc: "Designed a comprehensive information portal for Palembang City's 2025 SPMB program covering elementary and junior high school levels, delivering complete information on registration timelines, administrative provisions, selection stages, acceptance announcements, and detailed admission guidelines for the community and prospective students.",
-		image: '/archive/spmb-palembang-2025.jpg'
-	},
-	{
-		year: '2024',
-		title: 'Sistem Informasi Pendidikan Kab. Mimika',
-		category: 'WEBSITE',
-		stack: 'React.js',
-		desc: 'Developed an educator information system for Mimika Regency that provides comprehensive data on all schools across education levels, covering institutional profiles, educator information, facilities, and education statistics to enhance transparency and accessibility of educational information throughout the Mimika region.',
-		image: '/archive/sip-mimika.jpg',
-		link: 'https://dinaspendidikan.mimikakab.go.id/'
-	},
-	{
-		year: '2024',
-		title: 'Company Profile Mardawa',
-		category: 'WEBSITE',
-		stack: 'FIGMA',
-		desc: "Designed the UI/UX interface for PT Mardawa Intiguna Persada's corporate profile website, presenting the company's identity professionally through modern design, intuitive navigation, and optimal user experience to strengthen brand presence on digital platforms.",
-		image: '/archive/mardawa.jpg',
-		link: 'https://mardawa.id/'
-	}
-];
 
 const categories = ['ALL', 'WEBSITE', 'SOFTWARE', 'ML / AI'];
 
