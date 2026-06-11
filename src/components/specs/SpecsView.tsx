@@ -113,7 +113,7 @@ export default function SpecsView() {
 							<div className="flex flex-col md:flex-row md:items-baseline justify-between mb-2">
 								<h3 className="text-xl font-bold uppercase">Frontend Dev & UI/UX Designer</h3>
 								<span className="font-mono text-sm bg-neo-black text-neo-white px-2">
-									Feb 2023 — Nov 2025
+									Jan 2023 — Des 2025
 								</span>
 							</div>
 							<p className="font-bold text-gray-500 text-sm mb-2">PT MARDAWA INTIGUNA PERSADA</p>
